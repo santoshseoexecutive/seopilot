@@ -1,0 +1,3285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO AutoPilot — Complete SEO OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:       #07080b;
+  --bg2:      #0d0f14;
+  --bg3:      #131620;
+  --bg4:      #181c28;
+  --bg5:      #1e2335;
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+  --border3:  rgba(255,255,255,0.16);
+  --text:     #e2e4ee;
+  --text2:    #9ca3b8;
+  --text3:    #5a6380;
+  --accent:   #5b8dee;
+  --accent2:  #7c6ff7;
+  --accent3:  #a78bfa;
+  --green:    #22c97a;
+  --green2:   #16a868;
+  --orange:   #f5a623;
+  --red:      #f04848;
+  --cyan:     #22d3ee;
+  --pink:     #f472b6;
+  --gold:     #eab308;
+
+  --g1: linear-gradient(135deg,#5b8dee,#7c6ff7);
+  --g2: linear-gradient(135deg,#22c97a,#22d3ee);
+  --g3: linear-gradient(135deg,#f5a623,#f04848);
+  --g4: linear-gradient(135deg,#7c6ff7,#f472b6);
+
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --r:   8px;
+  --r2: 12px;
+  --r3: 16px;
+  --sw: 240px;
+  --topbar-h: 60px;
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:15px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--bg5); border-radius:3px; }
+
+/* ── LAYOUT ── */
+.layout { display:flex; height:100vh; overflow:hidden; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sw);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.logo {
+  padding: 20px 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--g1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 15px; font-weight: 800; color:#fff;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+}
+.logo-mark::after {
+  content:'';
+  position:absolute;
+  top:-4px;right:-4px;
+  width:14px;height:14px;
+  background:rgba(255,255,255,0.3);
+  border-radius:50%;
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+.logo-text span { 
+  display:block;
+  font-size:10px;
+  font-weight:500;
+  color:var(--text3);
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  font-family: var(--font-body);
+}
+
+.nav-section {
+  padding: 18px 18px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px 8px 16px;
+  margin: 1px 8px;
+  border-radius: var(--r);
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text2);
+  transition: all .15s;
+  position: relative;
+  white-space: nowrap;
+  user-select: none;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active {
+  background: rgba(91,141,238,0.12);
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-item.active::before {
+  content:'';
+  position:absolute;
+  left:0; top:50%;
+  transform: translateY(-50%);
+  width: 3px; height: 18px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+}
+.nav-icon {
+  width: 17px; height: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nav-badge {
+  margin-left: auto;
+  background: rgba(91,141,238,0.2);
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: .3px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.user-widget {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px;
+  border-radius: var(--r2);
+  cursor: pointer;
+  transition: background .15s;
+}
+.user-widget:hover { background: var(--bg3); }
+.avatar {
+  width: 32px; height: 32px;
+  background: var(--g1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color:#fff;
+  flex-shrink: 0;
+  font-family: var(--font-head);
+}
+.user-info { flex:1; min-width:0; }
+.user-name { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.user-role { font-size:11px; color:var(--text3); margin-top:1px; }
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  height: var(--topbar-h);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.topbar-title {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  flex-shrink: 0;
+}
+.topbar-sub {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 1px;
+  white-space: nowrap;
+}
+.topbar-divider { width:1px; height:28px; background:var(--border2); flex-shrink:0; }
+.topbar-search {
+  flex: 1;
+  max-width: 340px;
+  position: relative;
+}
+.topbar-search input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 7px 12px 7px 34px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s;
+}
+.topbar-search input:focus { border-color: var(--accent); }
+.topbar-search input::placeholder { color: var(--text3); }
+.topbar-search .si {
+  position: absolute;
+  left: 11px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  font-size: 13px;
+  pointer-events: none;
+}
+.topbar-right { margin-left:auto; display:flex; align-items:center; gap:8px; }
+.icon-btn {
+  width: 34px; height: 34px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 14px;
+  transition: all .15s;
+  position: relative;
+}
+.icon-btn:hover { border-color: var(--border2); color: var(--text); }
+.notif-dot {
+  position:absolute; top:5px; right:5px;
+  width:6px;height:6px;
+  background:var(--accent);
+  border-radius:50%;
+  border:1.5px solid var(--bg2);
+}
+
+/* ── PAGE CONTENT ── */
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--r);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all .15s;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn-primary { background: var(--g1); color:#fff; }
+.btn-primary:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(91,141,238,.3); }
+.btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border2); }
+.btn-secondary:hover { background: var(--bg4); border-color: var(--border3); }
+.btn-ghost { background:transparent; color:var(--text2); border:1px solid var(--border2); }
+.btn-ghost:hover { background:var(--bg3); color:var(--text); }
+.btn-success { background:rgba(34,201,122,.12); color:var(--green); border:1px solid rgba(34,201,122,.25); }
+.btn-success:hover { background:rgba(34,201,122,.2); }
+.btn-danger { background:rgba(240,72,72,.12); color:var(--red); border:1px solid rgba(240,72,72,.25); }
+.btn-sm { padding:6px 12px; font-size:12px; }
+.btn-xs { padding:4px 9px; font-size:11px; }
+.btn:disabled { opacity:.5; cursor:not-allowed; transform:none !important; }
+
+/* ── FORMS ── */
+input[type=text], input[type=url], input[type=email], input[type=number], select, textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 9px 13px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+input::placeholder, textarea::placeholder { color: var(--text3); }
+select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6380' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; padding-right:30px; }
+textarea { resize:vertical; min-height:100px; line-height:1.6; }
+label { display:block; font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:.8px; margin-bottom:6px; font-family:var(--font-body); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: 20px;
+}
+.card-title {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.card-sub { font-size:12px; color:var(--text3); margin-top:2px; }
+.card-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; gap:12px; }
+.card-header .card-title { margin:0; }
+.card:hover { border-color:var(--border2); }
+
+/* ── STAT CARDS ── */
+.stats-row { display:grid; gap:14px; margin-bottom:20px; }
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: 18px 20px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.stat-card:hover { border-color:var(--border3); }
+.stat-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+}
+.stat-card.blue::before { background:var(--g1); }
+.stat-card.green::before { background:var(--g2); }
+.stat-card.orange::before { background:var(--g3); }
+.stat-card.purple::before { background:var(--g4); }
+.stat-icon-wrap {
+  width:36px;height:36px;
+  border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  margin-bottom:12px;
+}
+.stat-label { font-size:12px; color:var(--text3); font-weight:500; margin-bottom:6px; }
+.stat-value { font-family:var(--font-head); font-size:26px; font-weight:800; letter-spacing:-1px; line-height:1; }
+.stat-change { font-size:12px; margin-top:8px; display:flex; align-items:center; gap:4px; }
+.up { color:var(--green); }
+.down { color:var(--red); }
+.neutral { color:var(--text3); }
+
+/* ── BADGES ── */
+.badge {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 8px; border-radius:20px;
+  font-size:11px; font-weight:600;
+  font-family:var(--font-body);
+  white-space:nowrap;
+}
+.badge-blue { background:rgba(91,141,238,.12); color:#7aadff; }
+.badge-green { background:rgba(34,201,122,.12); color:#34d399; }
+.badge-orange { background:rgba(245,166,35,.12); color:#fbbf24; }
+.badge-red { background:rgba(240,72,72,.12); color:#f87171; }
+.badge-cyan { background:rgba(34,211,238,.12); color:#22d3ee; }
+.badge-gray { background:rgba(90,99,128,.12); color:#9ca3b8; }
+.badge-purple { background:rgba(124,111,247,.12); color:#a78bfa; }
+
+/* ── TABLE ── */
+.table-wrap { overflow-x:auto; border-radius:var(--r); }
+table { width:100%; border-collapse:collapse; font-size:13px; min-width:500px; }
+thead th {
+  text-align:left;
+  padding:9px 14px;
+  font-size:10.5px;
+  font-weight:700;
+  color:var(--text3);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+tbody td { padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:middle; }
+tbody tr:last-child td { border-bottom:none; }
+tbody tr { transition:background .1s; }
+tbody tr:hover td { background:rgba(255,255,255,.015); }
+
+/* ── PROGRESS ── */
+.progress { height:5px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:3px; transition:width .6s ease; }
+
+/* ── TABS ── */
+.tabs { display:flex; background:var(--bg3); border-radius:var(--r2); padding:3px; margin-bottom:20px; gap:2px; }
+.tab {
+  flex:1; padding:7px 14px; text-align:center;
+  font-size:13px; font-weight:500; color:var(--text2);
+  border-radius:9px; cursor:pointer;
+  transition:all .15s;
+}
+.tab.active { background:var(--bg2); color:var(--text); font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,.4); }
+
+/* ── TOGGLE ── */
+.toggle { position:relative; width:38px; height:20px; flex-shrink:0; }
+.toggle input { opacity:0; width:0; height:0; position:absolute; }
+.toggle-track {
+  position:absolute; inset:0;
+  background:var(--bg5);
+  border:1px solid var(--border3);
+  border-radius:10px;
+  cursor:pointer;
+  transition:.2s;
+}
+.toggle-thumb {
+  position:absolute;
+  top:2px; left:2px;
+  width:14px; height:14px;
+  background:var(--text3);
+  border-radius:50%;
+  transition:.2s;
+}
+.toggle input:checked ~ .toggle-track { background:rgba(91,141,238,.25); border-color:var(--accent); }
+.toggle input:checked ~ .toggle-thumb { transform:translateX(18px); background:var(--accent); }
+
+/* ── CHIPS ── */
+.chip-wrap { display:flex; flex-wrap:wrap; gap:5px; }
+.chip {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:5px 11px; border-radius:20px;
+  font-size:12px; font-weight:500;
+  background:var(--bg3); border:1px solid var(--border2);
+  cursor:pointer; color:var(--text2);
+  transition:all .15s;
+}
+.chip:hover { border-color:var(--accent); color:var(--accent); }
+.chip.on { background:rgba(91,141,238,.1); border-color:var(--accent); color:var(--accent); }
+
+/* ── INTENT TAGS ── */
+.intent {
+  display:inline-block;
+  padding:2px 7px; border-radius:4px;
+  font-size:10px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.4px;
+}
+.intent-info { background:rgba(34,211,238,.1); color:var(--cyan); }
+.intent-trans { background:rgba(34,201,122,.1); color:var(--green); }
+.intent-nav { background:rgba(245,166,35,.1); color:var(--orange); }
+.intent-comm { background:rgba(124,111,247,.1); color:var(--accent2); }
+
+/* ── AUDIT ITEMS ── */
+.audit-item { display:flex; gap:12px; padding:13px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+.audit-item:last-child { border-bottom:none; padding-bottom:0; }
+.audit-ic {
+  width:34px; height:34px; border-radius:var(--r);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; flex-shrink:0;
+}
+.audit-ic.err { background:rgba(240,72,72,.1); color:var(--red); }
+.audit-ic.warn { background:rgba(245,166,35,.1); color:var(--orange); }
+.audit-ic.ok { background:rgba(34,201,122,.1); color:var(--green); }
+.audit-title { font-size:13px; font-weight:600; margin-bottom:3px; }
+.audit-desc { font-size:12px; color:var(--text2); line-height:1.5; }
+
+/* ── SCORE RING ── */
+.score-ring-wrap { position:relative; display:inline-flex; }
+.score-ring-wrap svg { transform:rotate(-90deg); }
+.score-center {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+.score-num { font-family:var(--font-head); font-size:28px; font-weight:800; letter-spacing:-1px; }
+.score-lbl { font-size:10px; color:var(--text3); margin-top:1px; }
+
+/* ── META PREVIEW ── */
+.meta-preview {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 14px 16px;
+}
+.meta-url { font-size:12px; color:var(--green); margin-bottom:4px; }
+.meta-title { font-size:15px; color:#60a5fa; font-weight:600; margin-bottom:4px; cursor:pointer; }
+.meta-title:hover { text-decoration:underline; }
+.meta-desc { font-size:13px; color:var(--text2); line-height:1.5; }
+
+/* ── AI STREAM ── */
+.ai-stream {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--green);
+  background: rgba(34,201,122,.04);
+  border: 1px solid rgba(34,201,122,.15);
+  border-radius: var(--r2);
+  padding: 16px;
+  line-height: 1.8;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* ── DOTS LOADER ── */
+.dots { display:inline-flex; gap:4px; align-items:center; }
+.dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  animation: bounce .8s infinite;
+}
+.dot:nth-child(2) { animation-delay:.15s; }
+.dot:nth-child(3) { animation-delay:.3s; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* ── GRID HELPERS ── */
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid-7-5 { display:grid; grid-template-columns:1.5fr 1fr; gap:16px; }
+.grid-5-7 { display:grid; grid-template-columns:1fr 1.5fr; gap:16px; }
+.mb4 { margin-bottom:4px; }
+.mb8 { margin-bottom:8px; }
+.mb12 { margin-bottom:12px; }
+.mb16 { margin-bottom:16px; }
+.mb20 { margin-bottom:20px; }
+.mb24 { margin-bottom:24px; }
+.gap8 { gap:8px; }
+.gap12 { gap:12px; }
+.gap16 { gap:16px; }
+.flex { display:flex; }
+.flex-1 { flex:1; }
+.items-center { align-items:center; }
+.justify-between { justify-content:space-between; }
+.flex-col { flex-direction:column; }
+.w100 { width:100%; }
+.frow { display:flex; align-items:center; gap:8px; }
+
+/* ── CHART SVG ── */
+.chart-area { position:relative; overflow:visible; }
+
+/* ── RANK CHANGES ── */
+.rk-up { color:var(--green); }
+.rk-dn { color:var(--red); }
+.rk-eq { color:var(--text3); }
+
+/* ── WP CONNECT ── */
+.wp-conn { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+.wp-dot { width:7px;height:7px; border-radius:50%; flex-shrink:0; }
+.wp-conn.ok .wp-dot { background:var(--green); box-shadow:0 0 6px var(--green); }
+.wp-conn.err .wp-dot { background:var(--red); }
+
+/* ── COMPETITOR BARS ── */
+.comp-row { display:flex; align-items:center; gap:10px; margin:8px 0; }
+.comp-label { font-size:12px; color:var(--text2); width:140px; flex-shrink:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.comp-bar-bg { flex:1; height:7px; background:var(--bg4); border-radius:4px; overflow:hidden; }
+.comp-bar-fill { height:100%; border-radius:4px; background:var(--g1); }
+.comp-num { font-size:12px; font-weight:600; width:42px; text-align:right; flex-shrink:0; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.page-content > * { animation:fadeUp .22s ease both; }
+.page-content > *:nth-child(2) { animation-delay:.05s; }
+.page-content > *:nth-child(3) { animation-delay:.1s; }
+.page-content > *:nth-child(4) { animation-delay:.15s; }
+
+@keyframes spin { to { transform:rotate(360deg); } }
+.spin { animation:spin .8s linear infinite; display:inline-block; }
+
+@keyframes pulse-ring { 0%,100%{box-shadow:0 0 0 0 rgba(91,141,238,.4)} 50%{box-shadow:0 0 0 6px rgba(91,141,238,.1)} }
+.pulsing { animation:pulse-ring 2s infinite; }
+
+/* ── TOOLTIP ── */
+.tooltip { position:relative; }
+.tooltip::after {
+  content: attr(data-tip);
+  position:absolute; bottom:calc(100% + 6px); left:50%;
+  transform:translateX(-50%);
+  background:var(--bg5); color:var(--text);
+  padding:5px 9px; border-radius:6px;
+  font-size:11px; white-space:nowrap;
+  pointer-events:none; opacity:0; transition:opacity .15s;
+  border:1px solid var(--border2);
+}
+.tooltip:hover::after { opacity:1; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);
+  z-index:500;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:var(--r3);
+  width:560px; max-width:94vw;
+  max-height:90vh; overflow-y:auto;
+  transform:translateY(16px);
+  transition:transform .2s;
+}
+.modal-overlay.open .modal { transform:translateY(0); }
+.modal-header { padding:20px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.modal-body { padding:22px; }
+.modal-footer { padding:16px 22px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+
+/* ── SIDE PANEL ── */
+.side-panel {
+  position:fixed; top:0; right:0; bottom:0;
+  width:440px; max-width:95vw;
+  background:var(--bg2);
+  border-left:1px solid var(--border2);
+  z-index:400;
+  display:flex; flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+  box-shadow:-20px 0 60px rgba(0,0,0,.5);
+}
+.side-panel.open { transform:translateX(0); }
+.sp-header { padding:20px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+.sp-body { flex:1; overflow-y:auto; padding:20px 22px; }
+.sp-footer { padding:16px 22px; border-top:1px solid var(--border); flex-shrink:0; }
+
+/* ── NOTIFICATION TOAST ── */
+.toast-container { position:fixed; bottom:24px; right:24px; z-index:600; display:flex; flex-direction:column; gap:8px; }
+.toast {
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  border-radius:var(--r2);
+  padding:12px 16px;
+  font-size:13px;
+  display:flex; align-items:center; gap:10px;
+  min-width:280px;
+  animation:slideIn .25s ease;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+@keyframes slideIn { from{transform:translateX(120%);opacity:0} to{transform:translateX(0);opacity:1} }
+@keyframes slideOut { from{transform:translateX(0);opacity:1} to{transform:translateX(120%);opacity:0} }
+.toast.hiding { animation:slideOut .25s ease forwards; }
+.toast-icon { font-size:16px; flex-shrink:0; }
+.toast-text { flex:1; }
+.toast-close { color:var(--text3); cursor:pointer; padding:2px; }
+.toast-close:hover { color:var(--text); }
+.toast.success { border-color:rgba(34,201,122,.3); }
+.toast.success .toast-icon { color:var(--green); }
+.toast.error { border-color:rgba(240,72,72,.3); }
+.toast.error .toast-icon { color:var(--red); }
+.toast.info { border-color:rgba(91,141,238,.3); }
+.toast.info .toast-icon { color:var(--accent); }
+
+/* ── SECTION HEADER ── */
+.section-head {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px; gap:12px;
+}
+.section-title {
+  font-family:var(--font-head);
+  font-size:14px; font-weight:700; letter-spacing:-0.2px;
+}
+.section-sub { font-size:12px; color:var(--text3); margin-top:1px; }
+
+/* ── METRIC ROW ── */
+.mrow { display:flex; align-items:center; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.mrow:last-child { border-bottom:none; }
+.mrow-key { color:var(--text2); }
+.mrow-val { font-weight:600; }
+
+/* ── GOOGLE DOC CARD ── */
+.doc-card {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--r3);
+  padding:16px 18px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.doc-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+
+/* ── MISC ── */
+.separator { height:1px; background:var(--border); margin:16px 0; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:5px; }
+.tag {
+  padding:4px 10px; border-radius:20px;
+  font-size:11px; font-weight:500;
+  background:var(--bg4); color:var(--text2);
+  border:1px solid var(--border);
+}
+.mono { font-family:var(--font-mono); }
+.text-accent { color:var(--accent); }
+.text-green { color:var(--green); }
+.text-orange { color:var(--orange); }
+.text-red { color:var(--red); }
+.text-muted { color:var(--text2); }
+.text-dimmed { color:var(--text3); }
+.fw7 { font-weight:700; }
+.fw6 { font-weight:600; }
+.fs12 { font-size:12px; }
+.fs11 { font-size:11px; }
+.text-center { text-align:center; }
+.mt4 { margin-top:4px; }
+.mt8 { margin-top:8px; }
+.mt12 { margin-top:12px; }
+.mt16 { margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="layout" id="page-wrapper">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">⚡</div>
+      <div class="logo-text">SEO AutoPilot<span>AI-Powered SEO OS</span></div>
+    </div>
+    <nav id="main-nav"></nav>
+    <div class="sidebar-footer">
+      <div class="user-widget">
+        <div class="avatar">AK</div>
+        <div class="user-info"><div class="user-name">Arjun Kumar</div><div class="user-role">Pro Plan · Agency</div></div>
+        <div style="color:var(--text3);font-size:12px;">⋯</div>
+      </div>
+      <div style="margin-top:10px;padding:10px;background:rgba(91,141,238,.07);border:1px solid rgba(91,141,238,.15);border-radius:var(--r);font-size:11.5px;color:var(--text2);text-align:center;line-height:1.5;">
+        340 / 500 AI credits used<br>
+        <div class="progress" style="height:3px;margin:6px 0 0;"><div class="progress-fill" style="width:68%;background:var(--g1);"></div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="topbar-sub" id="topbar-sub">Your SEO command center</div>
+      </div>
+      <div class="topbar-divider"></div>
+      <div class="topbar-search">
+        <span class="si">🔍</span>
+        <input type="text" placeholder="Search keywords, pages, content... (Ctrl+K)" id="global-search" oninput="globalSearch(this.value)">
+      </div>
+      <div class="topbar-right">
+        <div class="icon-btn" onclick="toggleDarkMode()" title="Toggle theme" style="font-size:16px;">🌙</div>
+        <div class="icon-btn" onclick="showNotifications()">🔔<div class="notif-dot"></div></div>
+        <div class="icon-btn" onclick="App.navigate('settings')">⚙️</div>
+        <button class="btn btn-primary" onclick="App.navigate('content')">✨ AI Generate</button>
+      </div>
+    </header>
+    <div id="page-content" style="flex:1;overflow-y:auto;">
+      <div class="page-content" id="pc"></div>
+    </div>
+  </div>
+</div>
+<div class="toast-container" id="toast-container"></div>
+<script>
+// ═══════════════════════════════════════════════════════
+//  SEO AutoPilot — Core Application
+// ═══════════════════════════════════════════════════════
+
+const App = {
+  currentPage: 'dashboard',
+  state: {
+    keywords: [],
+    contents: [],
+    audits: [],
+    rankings: [],
+    backlinks: [],
+    competitors: [],
+    docs: [],
+    sheets: [],
+    posts: [],
+    settings: {
+      wpUrl: 'https://yoursite.com',
+      wpUser: 'admin',
+      wpConnected: true,
+      gsConnected: true,
+      gdConnected: true,
+      yoastEnabled: true,
+    }
+  },
+
+  init() {
+    this.seedData();
+    this.renderSidebar();
+    this.navigate('dashboard');
+    this.initToasts();
+  },
+
+  navigate(page) {
+    this.currentPage = page;
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    const target = document.querySelector(`[data-page="${page}"]`);
+    if (target) target.classList.add('active');
+
+    const meta = PAGES[page] || PAGES.dashboard;
+    document.getElementById('topbar-title').textContent = meta.title;
+    document.getElementById('topbar-sub').textContent = meta.sub;
+
+    const container = document.getElementById('page-content');
+    container.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'page-content';
+    div.id = 'pc';
+    container.appendChild(div);
+    meta.render(div);
+  },
+
+  seedData() {
+    this.state.keywords = SEED.keywords;
+    this.state.contents = SEED.contents;
+    this.state.rankings = SEED.rankings;
+    this.state.backlinks = SEED.backlinks;
+    this.state.docs = SEED.docs;
+    this.state.sheets = SEED.sheets;
+    this.state.posts = SEED.posts;
+    this.state.audits = SEED.audits;
+  },
+
+  renderSidebar() {
+    const nav = document.getElementById('main-nav');
+    const sections = [
+      { label: 'Overview', items: [
+        { id:'dashboard', icon:'📊', label:'Dashboard' },
+      ]},
+      { label: 'Research', items: [
+        { id:'keywords', icon:'🔍', label:'Keyword Research', badge:'AI' },
+        { id:'competitor', icon:'♟', label:'Competitor Analysis' },
+      ]},
+      { label: 'Content', items: [
+        { id:'content', icon:'✨', label:'AI Content Engine' },
+        { id:'optimize', icon:'🎯', label:'Content Optimizer' },
+        { id:'docs', icon:'📄', label:'Google Docs Hub' },
+      ]},
+      { label: 'SEO', items: [
+        { id:'audit', icon:'🛡', label:'Technical Audit' },
+        { id:'ranking', icon:'📈', label:'Rank Tracker' },
+        { id:'backlinks', icon:'🔗', label:'Backlinks' },
+      ]},
+      { label: 'Publish', items: [
+        { id:'sheets', icon:'📋', label:'Sheets Tracker' },
+        { id:'publish', icon:'🚀', label:'WordPress Publisher' },
+        { id:'settings', icon:'⚙️', label:'Settings' },
+      ]},
+    ];
+
+    let html = '';
+    sections.forEach(s => {
+      html += `<div class="nav-section">${s.label}</div>`;
+      s.items.forEach(item => {
+        html += `<div class="nav-item" data-page="${item.id}" onclick="App.navigate('${item.id}')">
+          <span class="nav-icon">${item.icon}</span>
+          ${item.label}
+          ${item.badge ? `<span class="nav-badge">${item.badge}</span>` : ''}
+        </div>`;
+      });
+    });
+    nav.innerHTML = html;
+  },
+
+  // ── TOAST SYSTEM ──
+  initToasts() {
+    const tc = document.createElement('div');
+    tc.className = 'toast-container';
+    tc.id = 'toast-container';
+    document.body.appendChild(tc);
+  },
+
+  toast(msg, type='success', duration=3500) {
+    const icons = { success:'✅', error:'❌', info:'ℹ️', warning:'⚠️' };
+    const tc = document.getElementById('toast-container');
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `
+      <span class="toast-icon">${icons[type]||'✅'}</span>
+      <span class="toast-text">${msg}</span>
+      <span class="toast-close" onclick="this.parentElement.remove()">✕</span>`;
+    tc.appendChild(el);
+    setTimeout(() => {
+      el.classList.add('hiding');
+      setTimeout(() => el.remove(), 300);
+    }, duration);
+  },
+
+  // ── MODAL ──
+  openModal(html, title='') {
+    let ov = document.getElementById('app-modal');
+    if (!ov) {
+      ov = document.createElement('div');
+      ov.id = 'app-modal';
+      ov.className = 'modal-overlay';
+      ov.innerHTML = `<div class="modal">
+        <div class="modal-header">
+          <div class="card-title" id="modal-title"></div>
+          <button class="btn btn-ghost btn-xs" onclick="App.closeModal()">✕ Close</button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+      </div>`;
+      ov.addEventListener('click', e => { if(e.target===ov) App.closeModal(); });
+      document.body.appendChild(ov);
+    }
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-body').innerHTML = html;
+    ov.classList.add('open');
+  },
+
+  closeModal() {
+    const ov = document.getElementById('app-modal');
+    if (ov) ov.classList.remove('open');
+  },
+
+  // ── SIDE PANEL ──
+  openPanel(html, title='') {
+    let sp = document.getElementById('app-panel');
+    if (!sp) {
+      sp = document.createElement('div');
+      sp.id = 'app-panel';
+      sp.className = 'side-panel';
+      sp.innerHTML = `<div class="sp-header">
+          <div class="card-title" id="panel-title"></div>
+          <button class="btn btn-ghost btn-xs" onclick="App.closePanel()">✕</button>
+        </div>
+        <div class="sp-body" id="panel-body"></div>`;
+      document.body.appendChild(sp);
+    }
+    document.getElementById('panel-title').textContent = title;
+    document.getElementById('panel-body').innerHTML = html;
+    sp.classList.add('open');
+  },
+
+  closePanel() {
+    const sp = document.getElementById('app-panel');
+    if (sp) sp.classList.remove('open');
+  },
+};
+
+// ═══════════════════════════════════════════════════════
+//  PAGE METADATA
+// ═══════════════════════════════════════════════════════
+const PAGES = {
+  dashboard:  { title:'Dashboard',             sub:'Your SEO command center — all key metrics at a glance', render: renderDashboard },
+  keywords:   { title:'Keyword Research',      sub:'Discover, cluster and classify keywords with AI', render: renderKeywords },
+  content:    { title:'AI Content Engine',     sub:'Generate SEO-optimized content with a single click', render: renderContent },
+  optimize:   { title:'Content Optimizer',     sub:'Score and improve existing content for higher rankings', render: renderOptimize },
+  audit:      { title:'Technical SEO Audit',   sub:'Crawl your site and detect every issue that hurts rankings', render: renderAudit },
+  ranking:    { title:'Rank Tracker',          sub:'Track keyword positions daily — globally or by geo', render: renderRanking },
+  backlinks:  { title:'Backlink Monitor',      sub:'Track, analyze and protect your backlink profile', render: renderBacklinks },
+  competitor: { title:'Competitor Analysis',   sub:'Reverse-engineer competitor SEO strategies and find gaps', render: renderCompetitor },
+  docs:       { title:'Google Docs Hub',       sub:'All generated content auto-saved and organized in Google Drive', render: renderDocs },
+  sheets:     { title:'Sheets Workflow Tracker', sub:'Full content pipeline tracked in Google Sheets in real time', render: renderSheets },
+  publish:    { title:'WordPress Publisher',   sub:'Publish, schedule and manage posts directly from AutoPilot', render: renderPublish },
+  settings:   { title:'Settings & Integrations', sub:'Connect Google, WordPress, and configure your account', render: renderSettings },
+};
+
+// ═══════════════════════════════════════════════════════
+//  SEED DATA
+// ═══════════════════════════════════════════════════════
+const SEED = {
+  keywords: [
+    { kw:'best seo tools', vol:18100, kd:52, cpc:6.40, intent:'commercial', pos:3, trend:'up' },
+    { kw:'seo audit tool free', vol:9400, kd:41, cpc:2.80, intent:'transactional', pos:7, trend:'up' },
+    { kw:'keyword research software', vol:22000, kd:67, cpc:8.10, intent:'commercial', pos:12, trend:'down' },
+    { kw:'on page seo checker', vol:6800, kd:38, cpc:3.50, intent:'transactional', pos:4, trend:'same' },
+    { kw:'backlink monitoring tool', vol:4200, kd:44, cpc:4.20, intent:'commercial', pos:8, trend:'up' },
+    { kw:'rank tracker tool', vol:7900, kd:55, cpc:5.60, intent:'commercial', pos:14, trend:'up' },
+    { kw:'seo content generator ai', vol:3300, kd:29, cpc:3.10, intent:'transactional', pos:6, trend:'up' },
+    { kw:'technical seo audit checklist', vol:2800, kd:33, cpc:2.40, intent:'informational', pos:9, trend:'same' },
+    { kw:'how to improve seo ranking', vol:12400, kd:48, cpc:2.90, intent:'informational', pos:17, trend:'up' },
+    { kw:'seo automation software', vol:4600, kd:44, cpc:7.20, intent:'commercial', pos:null, trend:null },
+    { kw:'ai seo content writer', vol:3200, kd:28, cpc:3.10, intent:'transactional', pos:38, trend:'up' },
+    { kw:'competitor keyword gap', vol:1800, kd:31, cpc:2.80, intent:'informational', pos:22, trend:'up' },
+  ],
+  contents: [
+    { id:1, title:'10 Best SEO Tools in 2025', kw:'best seo tools', type:'Blog Post', status:'Published', score:91, words:2840, created:'Jan 10', updated:'Jan 12', url:'/blog/best-seo-tools-2025' },
+    { id:2, title:'How to Do Keyword Research: Complete Guide', kw:'keyword research software', type:'Guide', status:'Pending Review', score:78, words:3200, created:'Jan 14', updated:'Jan 15', url:null },
+    { id:3, title:'Technical SEO Audit: Step-by-Step Checklist', kw:'technical seo audit', type:'Guide', status:'Draft', score:64, words:1800, created:'Jan 18', updated:'Jan 18', url:null },
+    { id:4, title:'Best Backlink Building Strategies for 2025', kw:'backlink building', type:'Blog Post', status:'Published', score:88, words:2100, created:'Jan 8', updated:'Jan 9', url:'/blog/backlink-strategies' },
+    { id:5, title:'On-Page SEO: The Ultimate Checklist', kw:'on page seo', type:'Checklist', status:'Pending Review', score:72, words:1600, created:'Jan 20', updated:'Jan 20', url:null },
+    { id:6, title:'AI Content Writing: How to Scale Your Blog', kw:'ai seo content writer', type:'Blog Post', status:'Draft', score:55, words:900, created:'Jan 22', updated:'Jan 22', url:null },
+  ],
+  rankings: [
+    { kw:'best seo tools', pos:3, prev:5, vol:18100, url:'/blog/best-seo-tools-2025', engine:'Google', geo:'Global', updated:'Today' },
+    { kw:'seo audit tool free', pos:7, prev:12, vol:9400, url:'/features/audit', engine:'Google', geo:'Global', updated:'Today' },
+    { kw:'keyword research software', pos:12, prev:11, vol:22000, url:'/features/keywords', engine:'Google', geo:'India', updated:'Yesterday' },
+    { kw:'on page seo checker', pos:4, prev:4, vol:6800, url:'/features/optimize', engine:'Google', geo:'Global', updated:'Today' },
+    { kw:'backlink monitoring tool', pos:8, prev:11, vol:4200, url:'/features/backlinks', engine:'Google', geo:'Global', updated:'Today' },
+    { kw:'rank tracker tool', pos:14, prev:19, vol:7900, url:'/features/rank', engine:'Google', geo:'India', updated:'Today' },
+    { kw:'seo content generator ai', pos:6, prev:8, vol:3300, url:'/features/content', engine:'Google', geo:'Global', updated:'Today' },
+    { kw:'technical seo audit checklist', pos:9, prev:9, vol:2800, url:'/blog/technical-seo', engine:'Google', geo:'Global', updated:'Yesterday' },
+  ],
+  backlinks: [
+    { domain:'techcrunch.com', dr:93, anchor:'seo automation', type:'Dofollow', date:'Jan 20', spam:2 },
+    { domain:'searchengineland.com', dr:88, anchor:'best seo tools', type:'Dofollow', date:'Jan 18', spam:1 },
+    { domain:'moz.com', dr:91, anchor:'keyword research', type:'Nofollow', date:'Jan 15', spam:1 },
+    { domain:'semrush.com', dr:79, anchor:'seo tool comparison', type:'Dofollow', date:'Jan 14', spam:3 },
+    { domain:'hubspot.com', dr:92, anchor:'content seo', type:'Nofollow', date:'Jan 12', spam:1 },
+    { domain:'ahrefs.com', dr:91, anchor:'rank tracking', type:'Dofollow', date:'Jan 10', spam:2 },
+    { domain:'spamsite-junk.net', dr:8, anchor:'click here', type:'Dofollow', date:'Dec 28', spam:94 },
+    { domain:'link-farm-xyz.com', dr:12, anchor:'seo tools', type:'Dofollow', date:'Dec 20', spam:88 },
+    { domain:'cheap-links.biz', dr:19, anchor:'visit here', type:'Dofollow', date:'Dec 15', spam:72 },
+  ],
+  docs: [
+    { id:1, title:'10 Best SEO Tools in 2025', kw:'best seo tools', status:'Final', folder:'Blog Posts', updated:'2h ago', version:3, docUrl:'#', metaTitle:'10 Best SEO Tools in 2025 | AutoPilot', metaDesc:'Discover the top 10 SEO tools of 2025.' },
+    { id:2, title:'How to Do Keyword Research', kw:'keyword research', status:'Pending Review', folder:'Guides', updated:'1d ago', version:2, docUrl:'#', metaTitle:'Keyword Research Guide 2025', metaDesc:'Learn how to find the best keywords.' },
+    { id:3, title:'Technical SEO Audit Guide', kw:'technical seo audit', status:'Draft', folder:'Guides', updated:'3d ago', version:1, docUrl:'#', metaTitle:'Technical SEO Audit Checklist', metaDesc:'A step-by-step audit checklist.' },
+    { id:4, title:'Backlink Building Strategies', kw:'link building', status:'Final', folder:'Blog Posts', updated:'5d ago', version:4, docUrl:'#', metaTitle:'Best Backlink Strategies 2025', metaDesc:'Learn proven link building tactics.' },
+    { id:5, title:'Content Optimization Tips', kw:'content seo', status:'Pending Review', folder:'Guides', updated:'1w ago', version:2, docUrl:'#', metaTitle:'Content Optimization Guide', metaDesc:'How to optimize your content for SEO.' },
+    { id:6, title:'On-Page SEO Checklist', kw:'on page seo', status:'Draft', folder:'Checklists', updated:'2w ago', version:1, docUrl:'#', metaTitle:'On-Page SEO Checklist 2025', metaDesc:'The complete on-page SEO checklist.' },
+  ],
+  sheets: [
+    { id:1, topic:'10 Best SEO Tools 2025', kw:'seo tools, seo software', type:'Blog', status:'Published', url:'/blog/seo-tools', created:'Jan 10', updated:'Jan 12' },
+    { id:2, topic:'How to Do Keyword Research', kw:'keyword research tool', type:'Guide', status:'Pending Review', url:null, created:'Jan 14', updated:'Jan 15' },
+    { id:3, topic:'Technical SEO Audit Guide', kw:'technical seo, site audit', type:'Guide', status:'Draft', url:null, created:'Jan 18', updated:'Jan 18' },
+    { id:4, topic:'Backlink Building Strategies', kw:'link building, backlinks', type:'Blog', status:'Published', url:'/blog/backlinks', created:'Jan 8', updated:'Jan 9' },
+    { id:5, topic:'On-Page SEO Checklist', kw:'on page seo, seo checklist', type:'Checklist', status:'Draft', url:null, created:'Jan 20', updated:'Jan 20' },
+    { id:6, topic:'AI Content Writing Guide', kw:'ai content, seo content', type:'Blog', status:'Published', url:'/blog/ai-content', created:'Jan 5', updated:'Jan 7' },
+    { id:7, topic:'Core Web Vitals Optimization', kw:'core web vitals, page speed', type:'Guide', status:'Pending Review', url:null, created:'Jan 22', updated:'Jan 23' },
+    { id:8, topic:'Local SEO Strategy 2025', kw:'local seo, google my business', type:'Blog', status:'Draft', url:null, created:'Jan 25', updated:'Jan 25' },
+  ],
+  posts: [
+    { id:1, title:'10 Best SEO Tools in 2025', status:'Published', date:'Jan 12', url:'https://yoursite.com/blog/seo-tools', views:3841 },
+    { id:2, title:'Backlink Building 101', status:'Published', date:'Jan 9', url:'https://yoursite.com/blog/backlinks', views:2104 },
+    { id:3, title:'AI Content Writing Guide', status:'Published', date:'Jan 7', url:'https://yoursite.com/blog/ai-content', views:1876 },
+    { id:4, title:'Keyword Research Guide', status:'Draft', date:'—', url:null, views:0 },
+  ],
+  audits: [
+    { type:'error', icon:'🔗', title:'Broken Links', count:14, desc:'14 internal links returning 404 errors. Hurts crawl budget and user experience.' },
+    { type:'error', icon:'🏷', title:'Missing Meta Descriptions', count:22, desc:'22 pages have no meta description, reducing CTR from search results.' },
+    { type:'error', icon:'🔁', title:'Duplicate Title Tags', count:8, desc:'8 pages share identical title tags causing keyword cannibalization.' },
+    { type:'error', icon:'⚡', title:'Core Web Vitals Failing', count:6, desc:'LCP >4s on 6 pages. Google may deprioritize these in rankings.' },
+    { type:'warning', icon:'📱', title:'Mobile Usability Issues', count:3, desc:'Tap targets too small on 3 pages. Google uses mobile-first indexing.' },
+    { type:'warning', icon:'📝', title:'Missing H1 Tags', count:7, desc:'7 pages lack an H1. Weakens topical relevance signals.' },
+    { type:'warning', icon:'🖼', title:'Images Without Alt Text', count:31, desc:'31 images missing alt attributes, hurting accessibility and image search.' },
+    { type:'warning', icon:'🔃', title:'Redirect Chains', count:5, desc:'5 redirect chains detected. These slow page load and waste link equity.' },
+    { type:'ok', icon:'🔒', title:'HTTPS Enabled', count:null, desc:'All 428 pages served over HTTPS. Security signals are strong.' },
+    { type:'ok', icon:'🗺', title:'XML Sitemap', count:null, desc:'Sitemap valid and submitted to Google Search Console.' },
+    { type:'ok', icon:'🤖', title:'Robots.txt', count:null, desc:'Robots.txt configured correctly. No valuable pages blocked.' },
+  ],
+};
+
+// ═══════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════
+function h(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtVol(n) { return n>=1000 ? (n/1000).toFixed(1)+'K' : n; }
+function kdColor(kd) { return kd<35?'var(--green)':kd<55?'var(--orange)':'var(--red)'; }
+function statusBadge(s) {
+  const m = { 'Published':'badge-green','Pending Review':'badge-orange','Draft':'badge-gray','Final':'badge-blue','Live':'badge-green' };
+  return `<span class="badge ${m[s]||'badge-gray'}">${s}</span>`;
+}
+function intentTag(i) {
+  const m = { informational:'intent-info', transactional:'intent-trans', navigational:'intent-nav', commercial:'intent-comm' };
+  const labels = { informational:'Info', transactional:'Trans', navigational:'Nav', commercial:'Comm' };
+  return `<span class="intent ${m[i]||'intent-info'}">${labels[i]||i}</span>`;
+}
+function rankChange(pos, prev) {
+  if (!pos) return `<span class="rk-eq">—</span>`;
+  const d = prev - pos;
+  if (d > 0) return `<span class="rk-up">▲ ${d}</span>`;
+  if (d < 0) return `<span class="rk-dn">▼ ${Math.abs(d)}</span>`;
+  return `<span class="rk-eq">—</span>`;
+}
+
+function simulateStream(el, lines, interval=220, onDone) {
+  el.textContent = '';
+  let i = 0;
+  const iv = setInterval(() => {
+    if (i < lines.length) {
+      el.textContent += lines[i] + '\n';
+      el.scrollTop = el.scrollHeight;
+      i++;
+    } else {
+      clearInterval(iv);
+      if (onDone) onDone();
+    }
+  }, interval);
+  return iv;
+}
+
+function crawlAnimation(el, onDone) {
+  const steps = [
+    '🕷  Initializing crawler...',
+    '📡  Connecting to yoursite.com...',
+    '🔍  Crawling homepage — OK (200)',
+    '🔍  Crawling /blog — OK (200)',
+    '🔍  Crawling /features/audit — OK (200)',
+    '⚠   /blog/old-post → 404 detected',
+    '⚠   /features/legacy → 301 redirect chain',
+    '🔍  Crawling /contact — OK (200)',
+    '🔍  Crawling /pricing — OK (200)',
+    '❌  Missing meta desc: /blog/case-study-3',
+    '❌  Duplicate title: /blog/seo-guide vs /guides/seo',
+    '🔍  Checking Core Web Vitals...',
+    '⚡  LCP: 4.2s on /blog/heavy-post — FAIL',
+    '📱  Mobile tap target: /contact form — WARN',
+    '🔗  Checking internal links...',
+    '✅  428 pages crawled successfully.',
+    '📊  Generating audit report...',
+    '✅  Done! 4 critical · 7 warnings · 3 OK',
+  ];
+  simulateStream(el, steps, 280, onDone);
+}
+
+window.App = App;
+window.SEED = SEED;
+window.h = h;
+window.fmtVol = fmtVol;
+window.kdColor = kdColor;
+window.statusBadge = statusBadge;
+window.intentTag = intentTag;
+window.rankChange = rankChange;
+window.simulateStream = simulateStream;
+window.crawlAnimation = crawlAnimation;
+// ═══════════════════════════════════════════════════════
+//  DASHBOARD PAGE
+// ═══════════════════════════════════════════════════════
+function renderDashboard(c) {
+  // Stat cards
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  stats.innerHTML = [
+    { color:'blue', icon:'📈', label:'Organic Traffic', value:'84,291', change:'+18.4% vs last month', dir:'up' },
+    { color:'green', icon:'🔑', label:'Ranking Keywords', value:'3,847', change:'+234 new this week', dir:'up' },
+    { color:'orange', icon:'📝', label:'Published Content', value:'142', change:'+12 this month', dir:'up' },
+    { color:'purple', icon:'🛡', label:'Avg SEO Score', value:'79/100', change:'+5 pts since last month', dir:'up' },
+  ].map(s => `
+    <div class="stat-card ${s.color}">
+      <div class="stat-icon-wrap" style="background:rgba(255,255,255,.05); font-size:18px;">${s.icon}</div>
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value">${s.value}</div>
+      <div class="stat-change ${s.dir}">${s.dir==='up'?'▲':'▼'} ${s.change}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  // Row 2: Traffic Chart + Intent Mix
+  const r2 = document.createElement('div');
+  r2.className = 'grid-7-5 mb20';
+  r2.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Organic Traffic Trend</div><div class="card-sub">Last 12 weeks — Google Search Console</div></div>
+        <select style="width:auto;padding:6px 28px 6px 10px;font-size:12px;">
+          <option>3 months</option><option>6 months</option><option>12 months</option>
+        </select>
+      </div>
+      <svg viewBox="0 0 580 130" style="width:100%;height:130px;overflow:visible;">
+        <defs>
+          <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5b8dee" stop-opacity=".3"/>
+            <stop offset="100%" stop-color="#5b8dee" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="tg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#22c97a" stop-opacity=".2"/>
+            <stop offset="100%" stop-color="#22c97a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid lines -->
+        <line x1="0" y1="20" x2="580" y2="20" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="0" y1="50" x2="580" y2="50" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="0" y1="80" x2="580" y2="80" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="0" y1="110" x2="580" y2="110" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <!-- Fill area -->
+        <path d="M0,110 C40,100 80,95 120,88 C160,80 200,84 240,72 C280,60 320,64 360,48 C400,34 440,38 480,24 C510,14 545,10 580,6 L580,130 L0,130Z" fill="url(#tg)"/>
+        <!-- Main line -->
+        <path d="M0,110 C40,100 80,95 120,88 C160,80 200,84 240,72 C280,60 320,64 360,48 C400,34 440,38 480,24 C510,14 545,10 580,6" fill="none" stroke="#5b8dee" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Dots -->
+        <circle cx="240" cy="72" r="4" fill="#5b8dee" stroke="#0d0f14" stroke-width="2"/>
+        <circle cx="480" cy="24" r="4" fill="#5b8dee" stroke="#0d0f14" stroke-width="2"/>
+        <circle cx="580" cy="6" r="5" fill="#5b8dee" stroke="#0d0f14" stroke-width="2"/>
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:8px;padding:0 2px;">
+        <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Keyword Intent Mix</div><div class="card-sub">All tracked keywords</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;margin:4px 0 16px;">
+        <svg viewBox="0 0 120 120" width="110" height="110">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#181c28" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#5b8dee" stroke-width="18" stroke-dasharray="126 188" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#22c97a" stroke-width="18" stroke-dasharray="70 244" stroke-dashoffset="-126" stroke-linecap="butt" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#f5a623" stroke-width="18" stroke-dasharray="38 276" stroke-dashoffset="-196" stroke-linecap="butt" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#7c6ff7" stroke-width="18" stroke-dasharray="20 294" stroke-dashoffset="-234" stroke-linecap="butt" transform="rotate(-90 60 60)"/>
+        </svg>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;">
+        ${[['#5b8dee','Informational','40%'],['#22c97a','Transactional','22%'],['#f5a623','Navigational','12%'],['#7c6ff7','Commercial','26%']].map(([c,l,p])=>`
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:${c};flex-shrink:0;"></div>
+          <span style="color:var(--text2);">${l}</span>
+          <span style="margin-left:auto;font-weight:700;">${p}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  c.appendChild(r2);
+
+  // Row 3: Pipeline + Rankings
+  const r3 = document.createElement('div');
+  r3.className = 'grid-2 mb20';
+  r3.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Content Pipeline</div><div class="card-sub">This month's workflow</div></div>
+        <button class="btn btn-ghost btn-xs" onclick="App.navigate('sheets')">View All →</button>
+      </div>
+      ${[['Draft','18 articles',45,'var(--text3)'],['Pending Review','9 articles',22,'var(--orange)'],['Optimized','7 articles',18,'var(--cyan)'],['Published','6 articles',15,'var(--green)']].map(([l,v,p,col])=>`
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+          <span style="color:var(--text2);">${l}</span><span style="font-weight:600;">${v}</span>
+        </div>
+        <div class="progress"><div class="progress-fill" style="width:${p}%;background:${col};"></div></div>
+      </div>`).join('')}
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;text-align:center;">
+        ${[['40','Total','var(--text)'],['6','Live','var(--green)'],['9','Review','var(--orange)'],['18','Draft','var(--text3)']].map(([n,l,c])=>`
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 4px;">
+          <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:${c};">${n}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:3px;">${l}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Top Ranking Keywords</div><div class="card-sub">Position changes this week</div></div>
+        <button class="btn btn-ghost btn-xs" onclick="App.navigate('ranking')">See All →</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keyword</th><th>Pos</th><th>Change</th><th>Vol</th></tr></thead>
+          <tbody>
+            ${App.state.rankings.slice(0,6).map(r=>`
+            <tr>
+              <td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r.kw}</td>
+              <td><strong style="font-family:var(--font-head);font-size:15px;">${r.pos}</strong></td>
+              <td>${rankChange(r.pos, r.prev)}</td>
+              <td class="text-dimmed" style="font-size:12px;">${fmtVol(r.vol)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  c.appendChild(r3);
+
+  // Row 4: Audit Summary + Activity
+  const r4 = document.createElement('div');
+  r4.className = 'grid-2';
+  r4.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Site Health Overview</div><div class="card-sub">Last crawl: 2 hours ago</div></div>
+        <button class="btn btn-primary btn-sm" onclick="App.navigate('audit')">Full Audit →</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+        ${[['4','Critical','var(--red)','rgba(240,72,72,.08)','rgba(240,72,72,.2)'],['11','Warnings','var(--orange)','rgba(245,166,35,.08)','rgba(245,166,35,.2)'],['23','Opps','var(--cyan)','rgba(34,211,238,.08)','rgba(34,211,238,.2)'],['84%','Health','var(--green)','rgba(34,201,122,.08)','rgba(34,201,122,.2)']].map(([v,l,c,bg,bd])=>`
+        <div style="background:${bg};border:1px solid ${bd};border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:${c};">${v}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:3px;">${l}</div>
+        </div>`).join('')}
+      </div>
+      <div class="progress" style="height:8px;border-radius:4px;margin-bottom:8px;">
+        <div style="height:100%;border-radius:4px;width:84%;background:linear-gradient(90deg,var(--green),var(--cyan));"></div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);text-align:right;">428 pages · 84% healthy</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Recent Activity</div></div>
+      <div>
+        ${[
+          { icon:'✅', text:'Article <strong>"10 Best SEO Tools"</strong> published to WordPress', time:'2h ago', col:'var(--green)' },
+          { icon:'🔍', text:'Site crawl completed — 4 new issues found', time:'2h ago', col:'var(--orange)' },
+          { icon:'✨', text:'AI generated <strong>"Core Web Vitals Guide"</strong>', time:'5h ago', col:'var(--accent)' },
+          { icon:'📈', text:'<strong>"seo audit tool free"</strong> moved from #12 → #7', time:'1d ago', col:'var(--cyan)' },
+          { icon:'🔗', text:'New backlink from <strong>techcrunch.com</strong> (DR 93)', time:'1d ago', col:'var(--green)' },
+          { icon:'📄', text:'Doc synced to Google Drive: "Backlink Strategies"', time:'2d ago', col:'var(--accent3)' },
+        ].map(a=>`
+        <div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">${a.icon}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12.5px;line-height:1.4;">${a.text}</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;">${a.time}</div>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  c.appendChild(r4);
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  KEYWORDS PAGE
+// ═══════════════════════════════════════════════════════
+function renderKeywords(c) {
+  // Search bar
+  const srch = document.createElement('div');
+  srch.className = 'card mb20';
+  srch.innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:220px;position:relative;">
+        <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;">🔍</span>
+        <input type="text" id="kw-input" placeholder="Enter seed keyword, topic or competitor domain..." style="padding-left:38px;" value="seo tools">
+      </div>
+      <select id="kw-geo" style="width:130px;">
+        <option value="global">🌐 Global</option>
+        <option value="in" selected>🇮🇳 India</option>
+        <option value="us">🇺🇸 USA</option>
+        <option value="uk">🇬🇧 UK</option>
+        <option value="au">🇦🇺 Australia</option>
+      </select>
+      <select id="kw-type" style="width:150px;">
+        <option>All Keywords</option>
+        <option>Long-tail Only</option>
+        <option>Low KD Only</option>
+        <option>High Volume</option>
+      </select>
+      <button class="btn btn-primary" onclick="kwResearch()">✨ Research with AI</button>
+      <button class="btn btn-secondary" onclick="kwExport()">⬇ Export CSV</button>
+    </div>`;
+  c.appendChild(srch);
+
+  // Main grid
+  const grid = document.createElement('div');
+  grid.className = 'grid-2 mb20';
+
+  // Clusters panel
+  const clusters = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Keyword Clusters</div><div class="card-sub">AI-grouped by semantic similarity</div></div>
+        <button class="btn btn-ghost btn-xs" onclick="App.toast('Cluster regenerated with AI','info')">↻ Recluster</button>
+      </div>
+      ${[
+        { name:'SEO Tools & Platforms', color:'rgba(91,141,238,.1)', border:'rgba(91,141,238,.2)', badge:'badge-blue', count:8, kws:['best seo tools','seo software','seo platform','free seo tools'] },
+        { name:'Keyword Research', color:'rgba(34,201,122,.07)', border:'rgba(34,201,122,.18)', badge:'badge-green', count:12, kws:['keyword research tool','keyword planner','kw finder','long tail keywords'] },
+        { name:'Rank Tracking', color:'rgba(34,211,238,.07)', border:'rgba(34,211,238,.18)', badge:'badge-cyan', count:6, kws:['rank tracker','serp tracker','keyword position checker'] },
+        { name:'Content & On-Page SEO', color:'rgba(245,166,35,.07)', border:'rgba(245,166,35,.18)', badge:'badge-orange', count:9, kws:['on page seo','content optimizer','seo content writer'] },
+      ].map(cl=>`
+      <div style="padding:12px;background:${cl.color};border:1px solid ${cl.border};border-radius:10px;margin-bottom:10px;cursor:pointer;" onclick="kwSelectCluster('${cl.name}')">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:13px;font-weight:600;">${cl.name}</span>
+          <span class="badge ${cl.badge}">${cl.count} kws</span>
+        </div>
+        <div class="chip-wrap">
+          ${cl.kws.map(k=>`<span class="chip on" style="font-size:11px;padding:3px 9px;">${k}</span>`).join('')}
+        </div>
+      </div>`).join('')}
+    </div>`;
+
+  // Table
+  const table = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Keyword Intelligence</div><div class="card-sub">${App.state.keywords.length} keywords found</div></div>
+        <button class="btn btn-primary btn-sm" onclick="kwGenContent()">✨ Generate Content</button>
+      </div>
+      <div class="table-wrap">
+        <table id="kw-table">
+          <thead><tr>
+            <th><input type="checkbox" onchange="kwSelectAll(this)" style="width:auto;cursor:pointer;"></th>
+            <th>Keyword</th><th>Volume</th><th>KD</th><th>CPC</th><th>Intent</th><th>Your Pos</th><th>Action</th>
+          </tr></thead>
+          <tbody>
+            ${App.state.keywords.map((k,i)=>`
+            <tr>
+              <td><input type="checkbox" class="kw-check" style="width:auto;cursor:pointer;"></td>
+              <td style="font-size:13px;font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${k.kw}">${k.kw}</td>
+              <td style="font-weight:600;">${fmtVol(k.vol)}</td>
+              <td><span style="color:${kdColor(k.kd)};font-weight:700;">${k.kd}</span></td>
+              <td style="font-size:12px;">$${k.cpc.toFixed(2)}</td>
+              <td>${intentTag(k.intent)}</td>
+              <td style="font-weight:600;">${k.pos?`#${k.pos}`:`<span style="color:var(--text3);">—</span>`}</td>
+              <td>
+                <button class="btn btn-ghost btn-xs" onclick="kwWriteContent('${k.kw}')">Write</button>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+
+  grid.innerHTML = clusters + table;
+  c.appendChild(grid);
+
+  // Gap analysis
+  const gap = document.createElement('div');
+  gap.className = 'card';
+  gap.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">Competitor Keyword Gap Analysis</div><div class="card-sub">Keywords your competitors rank for — but you don't</div></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <input type="text" id="gap-domain" placeholder="competitor.com" style="width:180px;" value="ahrefs.com">
+        <button class="btn btn-primary btn-sm" onclick="runGapAnalysis()">🔍 Analyze Gap</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Their Pos</th><th>Your Pos</th><th>Volume</th><th>KD</th><th>CPC</th><th>Opportunity</th><th>Action</th></tr></thead>
+        <tbody>
+          ${[
+            ['seo automation software','2','Not ranking',4600,44,7.20,'High','badge-orange'],
+            ['ai seo content writer','5','#38',3200,28,3.10,'Quick Win','badge-green'],
+            ['technical seo audit checklist','1','Not ranking',7800,71,2.40,'Hard','badge-red'],
+            ['seo reporting tool','4','Not ranking',2900,38,4.80,'High','badge-orange'],
+            ['content brief generator','3','#42',1800,24,2.90,'Quick Win','badge-green'],
+          ].map(([kw,tp,yp,vol,kd,cpc,opp,bc])=>`
+          <tr>
+            <td style="font-size:12px;font-weight:500;">${kw}</td>
+            <td style="font-weight:700;color:var(--green);">#${tp}</td>
+            <td style="color:${yp==='Not ranking'?'var(--red)':'var(--orange)'};">${yp}</td>
+            <td style="font-size:12px;">${fmtVol(vol)}</td>
+            <td><span style="color:${kdColor(kd)};font-weight:700;">${kd}</span></td>
+            <td style="font-size:12px;">$${cpc.toFixed(2)}</td>
+            <td><span class="badge ${bc}">${opp}</span></td>
+            <td><button class="btn btn-ghost btn-xs" onclick="kwWriteContent('${kw}')">✨ Write</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  c.appendChild(gap);
+}
+
+function kwResearch() {
+  App.toast('🔍 Running AI keyword research...', 'info', 2000);
+  setTimeout(() => App.toast('✅ Found 47 new keywords!', 'success'), 2200);
+}
+function kwExport() {
+  App.toast('📥 Exporting keywords to CSV...', 'info', 1500);
+  setTimeout(() => App.toast('✅ keywords.csv downloaded!', 'success'), 1800);
+}
+function kwSelectAll(el) {
+  document.querySelectorAll('.kw-check').forEach(cb => cb.checked = el.checked);
+}
+function kwSelectCluster(name) {
+  App.toast(`Cluster "${name}" selected — ${Math.floor(Math.random()*8+4)} keywords`, 'info');
+}
+function kwWriteContent(kw) {
+  App.navigate('content');
+  setTimeout(() => {
+    const inp = document.getElementById('cb-keyword');
+    if (inp) { inp.value = kw; App.toast(`✅ Keyword loaded: "${kw}"`, 'success'); }
+  }, 200);
+}
+function kwGenContent() {
+  const checked = document.querySelectorAll('.kw-check:checked').length;
+  if (!checked) { App.toast('Select at least one keyword first!', 'error'); return; }
+  App.toast(`✨ Generating content briefs for ${checked} keywords...`, 'info');
+  setTimeout(() => App.navigate('content'), 800);
+}
+function runGapAnalysis() {
+  const domain = document.getElementById('gap-domain').value;
+  App.toast(`🔍 Analyzing gaps vs ${domain}...`, 'info', 2000);
+  setTimeout(() => App.toast('✅ Gap analysis complete — 23 opportunities found!', 'success'), 2400);
+}
+
+window.renderDashboard = renderDashboard;
+window.renderKeywords = renderKeywords;
+window.kwResearch = kwResearch;
+window.kwExport = kwExport;
+window.kwSelectAll = kwSelectAll;
+window.kwSelectCluster = kwSelectCluster;
+window.kwWriteContent = kwWriteContent;
+window.kwGenContent = kwGenContent;
+window.runGapAnalysis = runGapAnalysis;
+// ═══════════════════════════════════════════════════════
+//  AI CONTENT ENGINE PAGE
+// ═══════════════════════════════════════════════════════
+function renderContent(c) {
+  const row = document.createElement('div');
+  row.className = 'grid-7-5';
+  row.innerHTML = `
+    <!-- LEFT: Brief builder -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">✨ Content Brief</div><div class="card-sub">Configure your SEO content parameters</div></div>
+          <button class="btn btn-ghost btn-xs" onclick="loadTemplate()">📋 Load Template</button>
+        </div>
+        <div style="display:grid;gap:14px;">
+          <div>
+            <label>Primary Keyword</label>
+            <input type="text" id="cb-keyword" placeholder="e.g. best seo tools 2025" value="best seo tools 2025">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Content Type</label>
+              <select id="cb-type">
+                <option>Blog Post (Long-form)</option>
+                <option>Landing Page</option>
+                <option>Product Page</option>
+                <option>Pillar Page</option>
+                <option>FAQ Page</option>
+                <option>Comparison Page</option>
+              </select>
+            </div>
+            <div>
+              <label>Target Word Count</label>
+              <select id="cb-words">
+                <option>1000–1500 words</option>
+                <option selected>2000–2500 words</option>
+                <option>3000–3500 words</option>
+                <option>5000+ words (Pillar)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label>Secondary / LSI Keywords <span style="color:var(--text3);font-size:10px;">(comma separated)</span></label>
+            <input type="text" id="cb-lsi" placeholder="seo software, keyword research, rank tracking..." value="seo software, keyword tracker, content optimizer, rank tracker">
+          </div>
+          <div>
+            <label>Tone & Writing Style</label>
+            <div class="chip-wrap" id="cb-tones">
+              <span class="chip on" onclick="toggleChip(this)">Professional</span>
+              <span class="chip" onclick="toggleChip(this)">Conversational</span>
+              <span class="chip" onclick="toggleChip(this)">Technical</span>
+              <span class="chip" onclick="toggleChip(this)">Persuasive</span>
+              <span class="chip" onclick="toggleChip(this)">Casual</span>
+            </div>
+          </div>
+          <div>
+            <label>Include Sections</label>
+            <div class="chip-wrap">
+              <span class="chip on" onclick="toggleChip(this)">✅ FAQs (Schema-ready)</span>
+              <span class="chip on" onclick="toggleChip(this)">✅ Meta Tags</span>
+              <span class="chip on" onclick="toggleChip(this)">✅ H1–H6 Structure</span>
+              <span class="chip on" onclick="toggleChip(this)">✅ Internal Links</span>
+              <span class="chip" onclick="toggleChip(this)">📋 Table of Contents</span>
+              <span class="chip" onclick="toggleChip(this)">📊 Key Takeaways Box</span>
+            </div>
+          </div>
+          <div>
+            <label>Target Audience</label>
+            <input type="text" id="cb-audience" placeholder="e.g. SMB marketers, SEO beginners" value="Digital marketers, SEO professionals, startups">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Auto-save to Google Docs</label>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+                <label class="toggle">
+                  <input type="checkbox" id="cb-gdocs" checked>
+                  <div class="toggle-track"></div><div class="toggle-thumb"></div>
+                </label>
+                <span style="font-size:13px;color:var(--text2);">Save to Drive</span>
+              </div>
+            </div>
+            <div>
+              <label>Log to Google Sheets</label>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+                <label class="toggle">
+                  <input type="checkbox" id="cb-sheets" checked>
+                  <div class="toggle-track"></div><div class="toggle-thumb"></div>
+                </label>
+                <span style="font-size:13px;color:var(--text2);">Track in Sheet</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="justify-content:center;padding:11px;font-size:14px;" onclick="generateContent()">
+            ⚡ Generate SEO Content with AI
+          </button>
+        </div>
+      </div>
+
+      <!-- Output area -->
+      <div id="content-output" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title" id="gen-status-title">⚡ Generating Content...</div><div class="card-sub" id="gen-status-sub">AI is writing your SEO-optimized article</div></div>
+            <div class="dots" id="gen-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          </div>
+          <div class="ai-stream" id="gen-stream">Initializing...</div>
+          <div id="gen-actions" style="display:none;margin-top:14px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+              <button class="btn btn-secondary" style="justify-content:center;" onclick="saveToGdocs()">📄 Save to Google Docs</button>
+              <button class="btn btn-secondary" style="justify-content:center;" onclick="App.navigate('optimize')">🎯 Optimize Content</button>
+              <button class="btn btn-primary" style="justify-content:center;" onclick="App.navigate('publish')">🚀 Publish to WP</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Structure + Meta preview -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="card-title mb12">📐 Content Structure Preview</div>
+        <div id="structure-preview" style="font-size:13px;line-height:2;color:var(--text2);">
+          <div style="color:var(--text);font-weight:700;font-size:14px;margin-bottom:8px;">📄 10 Best SEO Tools in 2025</div>
+          ${[
+            ['H1','10 Best SEO Tools in 2025 (Ranked & Reviewed)','var(--accent)'],
+            ['H2','What to Look for in an SEO Tool','var(--cyan)'],
+            ['H2','Top 10 SEO Tools Compared','var(--cyan)'],
+            ['H3','1. SEO AutoPilot (Best Overall)','var(--green)'],
+            ['H3','2. Ahrefs (Best for Backlinks)','var(--green)'],
+            ['H3','3. Semrush (Best for Agencies)','var(--green)'],
+            ['H2','Free vs Paid SEO Tools','var(--cyan)'],
+            ['H2','How to Choose the Right SEO Tool','var(--cyan)'],
+            ['H2','FAQs About SEO Tools','var(--cyan)'],
+          ].map(([tag,text,col])=>`
+          <div style="margin-left:${tag==='H2'?'12':tag==='H3'?'24':tag==='H4'?'36':'0'}px;display:flex;align-items:baseline;gap:8px;">
+            <span style="color:${col};font-size:10px;font-weight:800;font-family:var(--font-mono);width:20px;flex-shrink:0;">${tag}</span>
+            <span style="font-size:${tag==='H1'?'13.5':tag==='H2'?'12.5':'12'}px;${tag==='H1'?'font-weight:700;color:var(--text);':''}">${text}</span>
+          </div>`).join('')}
+        </div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+          <span class="badge badge-green">~2,400 words</span>
+          <span class="badge badge-blue">12 internal links</span>
+          <span class="badge badge-cyan">5 FAQs</span>
+          <span class="badge badge-purple">Schema ready</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">🔎 Google SERP Preview</div>
+        <div class="meta-preview">
+          <div class="meta-url">yoursite.com › blog › best-seo-tools-2025</div>
+          <div class="meta-title" id="prev-title">10 Best SEO Tools in 2025 (Ranked & Reviewed)</div>
+          <div class="meta-desc" id="prev-desc">Discover the top 10 SEO tools of 2025. We compare features, pricing, and performance of keyword research, rank tracking, site audit, and content tools.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;">
+          <div class="mrow"><span class="mrow-key">Title length</span><span class="mrow-val text-green">52 chars ✓</span></div>
+          <div class="mrow"><span class="mrow-key">Desc length</span><span class="mrow-val text-green">148 chars ✓</span></div>
+          <div class="mrow"><span class="mrow-key">Keyword in title</span><span class="mrow-val text-green">Yes ✓</span></div>
+          <div class="mrow"><span class="mrow-key">Power word</span><span class="mrow-val text-green">Yes ✓</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">📅 Content Calendar</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Upcoming AI content schedule:</div>
+        ${[
+          ['Jan 28','Best Backlink Tools 2025','In queue'],
+          ['Jan 30','How to Fix Core Web Vitals','Scheduled'],
+          ['Feb 2','Local SEO Strategy Guide','Scheduled'],
+        ].map(([d,t,s])=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text3);width:44px;flex-shrink:0;">${d}</div>
+          <div style="flex:1;font-size:13px;">${t}</div>
+          <span class="badge badge-gray" style="font-size:10px;">${s}</span>
+        </div>`).join('')}
+        <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;margin-top:12px;" onclick="App.toast('Calendar view coming soon!','info')">📅 View Full Calendar</button>
+      </div>
+    </div>`;
+  c.appendChild(row);
+}
+
+function toggleChip(el) {
+  el.classList.toggle('on');
+}
+
+function generateContent() {
+  const kw = document.getElementById('cb-keyword').value || 'seo tools';
+  const el = document.getElementById('content-output');
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  const lines = [
+    `> Initializing AI content engine (Claude)...`,
+    `> Keyword: "${kw}"`,
+    `> Fetching top-10 SERP results...`,
+    `> Analyzing competitor content (avg 2,340 words)...`,
+    `> Running NLP analysis for LSI keywords...`,
+    `> LSI found: organic traffic, SERP, crawl budget, domain authority, backlinks`,
+    `> Generating SEO-optimized title...`,
+    `>   H1: "10 Best SEO Tools in 2025 (Ranked & Reviewed)" ✓`,
+    `> Writing meta title (52 chars)... ✓`,
+    `> Writing meta description (148 chars)... ✓`,
+    `> Building H2-H6 outline structure...`,
+    `> Writing introduction (320 words)...`,
+    `> Writing section: "What to Look for in an SEO Tool" (280 words)...`,
+    `> Writing section: "Top 10 SEO Tools Compared" (1,200 words)...`,
+    `> Writing section: "Free vs Paid Tools" (200 words)...`,
+    `> Inserting 12 internal link suggestions...`,
+    `> Generating FAQ schema markup (5 Q&A pairs)...`,
+    `> Running readability check: Flesch score 68 (Good) ✓`,
+    `> Keyword density check: 1.8% ✓`,
+    `> SEO Score: 91/100 ✓`,
+    `> Saving to Google Docs (Drive: /SEO AutoPilot/Blog Posts/)... ✓`,
+    `> Logging to Google Sheets (Row 49)... ✓`,
+    `>`,
+    `> ✅ Done! 2,480 words · SEO Score 91/100 · Ready for review.`,
+  ];
+
+  const stream = document.getElementById('gen-stream');
+  simulateStream(stream, lines, 280, () => {
+    document.getElementById('gen-status-title').textContent = '✅ Content Generated — Score 91/100';
+    document.getElementById('gen-status-sub').textContent = '2,480 words · Saved to Google Docs · Logged in Sheets';
+    document.getElementById('gen-dots').style.display = 'none';
+    document.getElementById('gen-actions').style.display = 'grid';
+    App.toast('✅ Content generated and saved to Google Docs!', 'success');
+
+    // Update sheets data
+    App.state.sheets.push({ id:99, topic:kw, kw:kw, type:'Blog', status:'Draft', url:null, created:'Today', updated:'Today' });
+  });
+}
+
+function loadTemplate() {
+  App.openModal(`
+    <div style="display:grid;gap:10px;">
+      ${[['📊 SEO Tool Review Template','Comparison posts with pros/cons table'],['📖 How-to Guide Template','Step-by-step instructional content'],['📋 Checklist Template','Scannable list-format content'],['🏆 Best-of Roundup Template','Top X listicle with scoring'],['🆚 Comparison Template','"X vs Y" head-to-head comparison']].map(([n,d])=>`
+      <div style="padding:12px;border:1px solid var(--border2);border-radius:10px;cursor:pointer;transition:border-color .15s;" onclick="App.toast('Template loaded: ${n}','success');App.closeModal();" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)'">
+        <div style="font-weight:600;font-size:13px;margin-bottom:3px;">${n}</div>
+        <div style="font-size:12px;color:var(--text3);">${d}</div>
+      </div>`).join('')}
+    </div>`, 'Choose a Content Template');
+}
+
+function saveToGdocs() {
+  App.toast('📄 Saving to Google Docs...', 'info', 1800);
+  setTimeout(() => App.toast('✅ Saved to Google Drive: /Blog Posts/Best SEO Tools 2025', 'success'), 2000);
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  CONTENT OPTIMIZER PAGE
+// ═══════════════════════════════════════════════════════
+function renderOptimize(c) {
+  const tabs = document.createElement('div');
+  tabs.className = 'tabs';
+  tabs.innerHTML = `
+    <div class="tab active" onclick="optimizeTab(this,'paste')">📋 Paste Content</div>
+    <div class="tab" onclick="optimizeTab(this,'url')">🌐 Analyze URL</div>
+    <div class="tab" onclick="optimizeTab(this,'compare')">⚖ SERP Compare</div>`;
+  c.appendChild(tabs);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-7-5';
+
+  grid.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div id="opt-paste-panel">
+          <div style="margin-bottom:12px;">
+            <label>Your Content (paste article or blog post)</label>
+            <textarea id="opt-content" style="min-height:200px;" placeholder="Paste your content here...">SEO tools help businesses improve their website rankings on search engines. A good SEO tool provides keyword research, rank tracking, and content optimization features. Many SEO platforms include site audit functionality to detect technical issues. The best seo tools allow users to monitor backlinks, track keyword positions, and generate SEO-optimized content automatically using AI.</textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div>
+              <label>Target Keyword</label>
+              <input type="text" id="opt-kw" placeholder="e.g. best seo tools" value="best seo tools">
+            </div>
+            <div>
+              <label>Competitor URL (optional)</label>
+              <input type="text" id="opt-comp" placeholder="https://competitor.com/blog/seo-tools">
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="runOptimize()">🎯 Analyze & Score Content</button>
+        </div>
+        <div id="opt-url-panel" style="display:none;">
+          <label>Page URL to Analyze</label>
+          <input type="url" placeholder="https://yoursite.com/blog/your-post" style="margin-bottom:12px;">
+          <label>Target Keyword</label>
+          <input type="text" placeholder="e.g. seo tools" style="margin-bottom:12px;">
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="runOptimize()">🎯 Fetch & Analyze Page</button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="card" id="opt-results" style="display:none;">
+        <div class="card-title mb16">📊 Optimization Analysis</div>
+        <div style="display:grid;gap:8px;">
+          ${[
+            ['Keyword in H1','Yes','ok','title tag contains primary keyword — good!'],
+            ['Keyword Density','1.8%','ok','Optimal range is 1-2.5%'],
+            ['Content Length','312 words','warn','Competitors avg 2,340 words. Expand significantly.'],
+            ['Internal Links','0 found','err','Add at least 4-6 internal links to related content'],
+            ['External Links','1 found','ok','1 authoritative outbound link — acceptable'],
+            ['Heading Structure','H1→H2 only','warn','Missing H3-H4 hierarchy — add subheadings'],
+            ['Meta Description','Not set','err','No meta description detected — add one immediately'],
+            ['Image Alt Text','Not analyzed','warn','Paste page source or use URL analyzer for images'],
+            ['Readability Score','Grade 11','warn','Aim for Grade 8-9 for broader audience reach'],
+            ['LSI Coverage','3 of 12','warn','Add more semantic keywords to strengthen topicality'],
+          ].map(([item, val, type, tip])=>`
+          <div style="display:flex;align-items:center;gap:10px;padding:9px;border-radius:8px;background:${type==='ok'?'rgba(34,201,122,.05)':type==='warn'?'rgba(245,166,35,.05)':'rgba(240,72,72,.05)'};">
+            <div style="width:6px;height:6px;border-radius:50%;flex-shrink:0;background:${type==='ok'?'var(--green)':type==='warn'?'var(--orange)':'var(--red)'};"></div>
+            <div style="width:150px;font-size:12.5px;font-weight:600;flex-shrink:0;">${item}</div>
+            <div style="font-size:12px;font-weight:700;width:90px;flex-shrink:0;color:${type==='ok'?'var(--green)':type==='warn'?'var(--orange)':'var(--red)'};">${val}</div>
+            <div style="font-size:12px;color:var(--text2);flex:1;">${tip}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="card-title mb16">SEO Score</div>
+        <div style="display:flex;align-items:center;gap:20px;" id="opt-score-wrap">
+          <div class="score-ring-wrap">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg4)" stroke-width="12"/>
+              <circle id="opt-score-ring" cx="60" cy="60" r="50" fill="none" stroke="var(--orange)" stroke-width="12"
+                stroke-dasharray="200 314" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="score-center">
+              <div class="score-num text-orange" id="opt-score-val">64</div>
+              <div class="score-lbl">/ 100</div>
+            </div>
+          </div>
+          <div style="flex:1;">
+            <div class="mrow"><span class="mrow-key">Keyword density</span><span class="mrow-val text-green">1.8% ✓</span></div>
+            <div class="mrow"><span class="mrow-key">Readability</span><span class="mrow-val text-orange">Grade 11</span></div>
+            <div class="mrow"><span class="mrow-key">Heading structure</span><span class="mrow-val text-orange">Needs work</span></div>
+            <div class="mrow"><span class="mrow-key">Internal links</span><span class="mrow-val text-red">Missing</span></div>
+            <div class="mrow"><span class="mrow-key">Meta description</span><span class="mrow-val text-red">Missing</span></div>
+            <div class="mrow"><span class="mrow-key">Content length</span><span class="mrow-val text-orange">Too short</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">🧠 NLP / LSI Suggestions</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Add these terms to strengthen topical authority:</div>
+        <div class="chip-wrap" id="lsi-chips">
+          ${['search engine optimization','organic traffic','SERP ranking','link building','domain authority','crawl budget','technical seo','meta tags','xml sitemap','anchor text','page speed','core web vitals'].map(t=>`<span class="chip" onclick="addLSI(this,'${t}')">+ ${t}</span>`).join('')}
+        </div>
+        <button class="btn btn-ghost btn-sm mt12" style="width:100%;justify-content:center;" onclick="App.toast('✨ Auto-inserting LSI keywords...','info');setTimeout(()=>App.toast('✅ 6 LSI terms added to content!','success'),1500)">
+          ✨ Auto-Insert All LSI Terms
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">🔧 Quick Fix Suggestions</div>
+        ${[
+          ['🔴','Add meta description','53 chars recommended','Fix it'],
+          ['🔴','Add 5+ internal links','Link to related content','Add links'],
+          ['🟡','Expand to 2,000+ words','Add more depth to each section','Expand with AI'],
+          ['🟡','Improve heading hierarchy','Add H3-H4 subheadings','Restructure'],
+          ['🟡','Add more LSI keywords','Use suggestions above','Auto-add'],
+        ].map(([sev,title,desc,action])=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:14px;flex-shrink:0;">${sev}</span>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;">${title}</div>
+            <div style="font-size:11px;color:var(--text3);">${desc}</div>
+          </div>
+          <button class="btn btn-ghost btn-xs" onclick="App.toast('Applying fix...','info')">${action}</button>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  c.appendChild(grid);
+}
+
+function optimizeTab(el, panel) {
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  ['opt-paste-panel','opt-url-panel'].forEach(id => {
+    const p = document.getElementById(id);
+    if (p) p.style.display = 'none';
+  });
+  const target = panel === 'paste' ? 'opt-paste-panel' : 'opt-url-panel';
+  if (document.getElementById(target)) document.getElementById(target).style.display = 'block';
+}
+
+function runOptimize() {
+  App.toast('🎯 Analyzing content...', 'info', 2000);
+  setTimeout(() => {
+    document.getElementById('opt-results').style.display = 'block';
+    document.getElementById('opt-results').scrollIntoView({ behavior:'smooth' });
+    App.toast('✅ Analysis complete — SEO Score: 64/100', 'success');
+  }, 2200);
+}
+
+function addLSI(el, term) {
+  el.classList.toggle('on');
+  if (el.classList.contains('on')) {
+    App.toast(`Added "${term}" to content`, 'success', 1500);
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  TECHNICAL SEO AUDIT PAGE
+// ═══════════════════════════════════════════════════════
+function renderAudit(c) {
+  // Crawl panel
+  const crawl = document.createElement('div');
+  crawl.className = 'card mb20';
+  crawl.innerHTML = `
+    <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;">
+        <label>Website URL</label>
+        <input type="url" id="audit-url" value="https://yoursite.com" placeholder="https://yoursite.com">
+      </div>
+      <div style="width:140px;">
+        <label>Crawl Depth</label>
+        <select><option>All pages</option><option>Homepage only</option><option>Top 100 pages</option></select>
+      </div>
+      <div style="width:160px;">
+        <label>Check Against</label>
+        <select><option>All rules</option><option>Critical only</option><option>Custom ruleset</option></select>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary" onclick="runAudit()" id="audit-btn">🕷 Start Audit</button>
+        <button class="btn btn-secondary" onclick="scheduleAudit()">📅 Schedule</button>
+        <button class="btn btn-ghost btn-sm" onclick="downloadAuditReport()">⬇ Export PDF</button>
+      </div>
+    </div>
+    <div id="audit-progress" style="display:none;margin-top:14px;">
+      <div style="font-size:13px;color:var(--text2);margin-bottom:8px;">Crawling in progress...</div>
+      <div class="progress" style="height:6px;margin-bottom:8px;">
+        <div class="progress-fill" id="audit-prog-bar" style="width:0%;background:var(--g1);transition:width .5s;"></div>
+      </div>
+      <div class="ai-stream" id="audit-stream" style="max-height:160px;"></div>
+    </div>`;
+  c.appendChild(crawl);
+
+  // Stats row
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  stats.innerHTML = [
+    { color:'red', label:'Critical Issues', val:'4', sub:'Immediate action required' },
+    { color:'orange', label:'Warnings', val:'8', sub:'Should fix soon' },
+    { color:'blue', label:'Pages Crawled', val:'428', sub:'Last crawl: 2h ago' },
+    { color:'green', label:'Site Health Score', val:'84%', sub:'↑ +3% this week' },
+  ].map(s=>`
+    <div class="stat-card ${s.color}">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value">${s.val}</div>
+      <div class="stat-change" style="color:var(--text3);">${s.sub}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  // Issues
+  const grid = document.createElement('div');
+  grid.className = 'grid-2 mb20';
+
+  const critical = App.state.audits.filter(a => a.type === 'error');
+  const warnings = App.state.audits.filter(a => a.type === 'warning');
+  const ok = App.state.audits.filter(a => a.type === 'ok');
+
+  grid.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">🔴 Critical Issues</div><div class="card-sub">Must fix for ranking improvements</div></div>
+        <button class="btn btn-danger btn-xs" onclick="App.toast('Generating fix guide...','info')">Fix All Guide</button>
+      </div>
+      ${critical.map(a=>`
+      <div class="audit-item">
+        <div class="audit-ic err">${a.icon}</div>
+        <div style="flex:1;">
+          <div class="audit-title">${a.title} ${a.count?`<span class="badge badge-red">${a.count}</span>`:''}</div>
+          <div class="audit-desc">${a.desc}</div>
+          <button class="btn btn-ghost btn-xs" style="margin-top:8px;" onclick="App.toast('Showing affected pages...','info')">View Affected Pages →</button>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">🟡 Warnings & ✅ Passing</div></div>
+      </div>
+      ${[...warnings, ...ok].map(a=>`
+      <div class="audit-item">
+        <div class="audit-ic ${a.type==='warning'?'warn':'ok'}">${a.icon}</div>
+        <div style="flex:1;">
+          <div class="audit-title">${a.title} ${a.count?`<span class="badge ${a.type==='warning'?'badge-orange':'badge-green'}">${a.count}</span>`:''}</div>
+          <div class="audit-desc">${a.desc}</div>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  c.appendChild(grid);
+
+  // Page Speed
+  const speed = document.createElement('div');
+  speed.className = 'card';
+  speed.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">⚡ Core Web Vitals</div><div class="card-sub">Google Page Experience signals</div></div>
+      <a class="btn btn-ghost btn-xs" href="#" onclick="App.toast('Opening PageSpeed Insights...','info')">Open PageSpeed ↗</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      ${[
+        ['LCP','Largest Contentful Paint','2.1s','<2.5s','ok','Measures load performance'],
+        ['FID','First Input Delay','48ms','<100ms','ok','Measures interactivity'],
+        ['CLS','Cumulative Layout Shift','0.18','<0.1','warn','Measures visual stability'],
+      ].map(([metric,name,val,target,type,desc])=>`
+      <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);padding:16px;text-align:center;">
+        <div style="font-family:var(--font-mono);font-size:22px;font-weight:700;color:${type==='ok'?'var(--green)':'var(--orange)'};">${val}</div>
+        <div style="font-size:11px;font-weight:700;margin:6px 0 2px;letter-spacing:.5px;">${metric}</div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:8px;">${name}</div>
+        <div style="font-size:11px;background:${type==='ok'?'rgba(34,201,122,.1)':'rgba(245,166,35,.1)'};color:${type==='ok'?'var(--green)':'var(--orange)'};padding:3px 8px;border-radius:20px;display:inline-block;">Target: ${target}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px;">${desc}</div>
+      </div>`).join('')}
+    </div>`;
+  c.appendChild(speed);
+}
+
+function runAudit() {
+  const btn = document.getElementById('audit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Crawling...';
+  document.getElementById('audit-progress').style.display = 'block';
+
+  const bar = document.getElementById('audit-prog-bar');
+  let prog = 0;
+  const progIv = setInterval(() => {
+    prog = Math.min(prog + Math.random() * 8, 95);
+    bar.style.width = prog + '%';
+    if (prog >= 95) clearInterval(progIv);
+  }, 400);
+
+  crawlAnimation(document.getElementById('audit-stream'), () => {
+    bar.style.width = '100%';
+    btn.disabled = false;
+    btn.textContent = '🕷 Re-crawl';
+    clearInterval(progIv);
+    App.toast('✅ Audit complete — 4 critical issues found', 'success');
+  });
+}
+
+function scheduleAudit() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div>
+        <label>Crawl Frequency</label>
+        <select style="width:100%;"><option>Daily</option><option selected>Weekly</option><option>Monthly</option></select>
+      </div>
+      <div>
+        <label>Crawl Time</label>
+        <input type="text" value="02:00 AM IST" style="width:100%;">
+      </div>
+      <div>
+        <label>Alert on New Issues</label>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+          <label class="toggle"><input type="checkbox" checked><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+          <span style="font-size:13px;color:var(--text2);">Email notification</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();App.toast('✅ Weekly audit scheduled for Mondays 2:00 AM','success')">Save Schedule</button>
+    </div>`, 'Schedule Automated Audit');
+}
+
+function downloadAuditReport() {
+  App.toast('⬇ Generating PDF audit report...', 'info', 2000);
+  setTimeout(() => App.toast('✅ seo-audit-report.pdf downloaded!', 'success'), 2200);
+}
+
+window.renderContent = renderContent;
+window.renderOptimize = renderOptimize;
+window.renderAudit = renderAudit;
+window.toggleChip = toggleChip;
+window.generateContent = generateContent;
+window.loadTemplate = loadTemplate;
+window.saveToGdocs = saveToGdocs;
+window.optimizeTab = optimizeTab;
+window.runOptimize = runOptimize;
+window.addLSI = addLSI;
+window.runAudit = runAudit;
+window.scheduleAudit = scheduleAudit;
+window.downloadAuditReport = downloadAuditReport;
+// ═══════════════════════════════════════════════════════
+//  RANK TRACKER PAGE
+// ═══════════════════════════════════════════════════════
+function renderRanking(c) {
+  const toolbar = document.createElement('div');
+  toolbar.className = 'card mb20';
+  toolbar.innerHTML = `
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+      <div>
+        <label>Search Engine</label>
+        <select style="width:110px;"><option>Google</option><option>Bing</option><option>Yahoo</option></select>
+      </div>
+      <div>
+        <label>Location</label>
+        <select style="width:130px;"><option>🌐 Global</option><option>🇮🇳 India</option><option>🇺🇸 USA</option><option>🇬🇧 UK</option></select>
+      </div>
+      <div>
+        <label>Time Range</label>
+        <select style="width:130px;"><option>Last 7 days</option><option selected>Last 30 days</option><option>Last 90 days</option></select>
+      </div>
+      <div>
+        <label>Filter Position</label>
+        <select style="width:120px;"><option>All positions</option><option>Top 3</option><option>Top 10</option><option>Top 30</option></select>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;">
+        <button class="btn btn-secondary btn-sm" onclick="App.toast('Refreshing rankings...','info')">↻ Refresh</button>
+        <button class="btn btn-secondary btn-sm" onclick="exportRankings()">⬇ Export</button>
+        <button class="btn btn-primary btn-sm" onclick="addKeywords()">+ Add Keywords</button>
+      </div>
+    </div>`;
+  c.appendChild(toolbar);
+
+  // Distribution
+  const distRow = document.createElement('div');
+  distRow.className = 'grid-4 mb20';
+  distRow.innerHTML = [
+    ['Top 3','241','var(--green)','rgba(34,201,122,.08)','rgba(34,201,122,.2)'],
+    ['Top 10','687','var(--accent)','rgba(91,141,238,.08)','rgba(91,141,238,.2)'],
+    ['Top 30','1,204','var(--cyan)','rgba(34,211,238,.08)','rgba(34,211,238,.2)'],
+    ['Top 100','1,715','var(--orange)','rgba(245,166,35,.08)','rgba(245,166,35,.2)'],
+  ].map(([l,v,c,bg,bd])=>`
+    <div style="background:${bg};border:1px solid ${bd};border-radius:var(--r3);padding:16px;text-align:center;">
+      <div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:${c};">${v}</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px;">${l}</div>
+    </div>`).join('');
+  c.appendChild(distRow);
+
+  // Chart + table
+  const grid = document.createElement('div');
+  grid.className = 'grid-7-5 mb20';
+  grid.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Rank Movement — "best seo tools"</div><div class="card-sub">Position 3 · ↑ +2 this week</div></div>
+      </div>
+      <!-- Simple SVG rank chart -->
+      <svg viewBox="0 0 500 140" style="width:100%;height:140px;overflow:visible;">
+        <defs>
+          <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#22c97a" stop-opacity=".25"/>
+            <stop offset="100%" stop-color="#22c97a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- Y-axis labels (inverted: top=rank 1) -->
+        <text x="0" y="20" fill="var(--text3)" font-size="10">1</text>
+        <text x="0" y="50" fill="var(--text3)" font-size="10">5</text>
+        <text x="0" y="80" fill="var(--text3)" font-size="10">10</text>
+        <text x="0" y="110" fill="var(--text3)" font-size="10">15</text>
+        <!-- Grid -->
+        <line x1="20" y1="20" x2="500" y2="20" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="20" y1="50" x2="500" y2="50" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="20" y1="80" x2="500" y2="80" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <line x1="20" y1="110" x2="500" y2="110" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+        <!-- Rank line (inverted Y: rank 1 at top) -->
+        <path d="M30,105 L95,98 L160,88 L225,95 L290,82 L355,68 L420,50 L480,28" fill="none" stroke="#22c97a" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M30,105 L95,98 L160,88 L225,95 L290,82 L355,68 L420,50 L480,28 L480,130 L30,130Z" fill="url(#rg)"/>
+        <!-- Current position dot -->
+        <circle cx="480" cy="28" r="5" fill="#22c97a" stroke="#0d0f14" stroke-width="2"/>
+        <text x="468" y="22" fill="#22c97a" font-size="10" font-weight="700">#3</text>
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);padding:0 20px;">
+        <span>Oct 1</span><span>Oct 15</span><span>Nov 1</span><span>Nov 15</span><span>Dec 1</span><span>Dec 15</span><span>Jan 1</span><span>Today</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title mb12">Top Movers This Week</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Biggest position changes (7 days)</div>
+      ${[
+        ['seo audit tool free','12 → 7','+5','up'],
+        ['rank tracker tool','19 → 14','+5','up'],
+        ['backlink monitoring tool','11 → 8','+3','up'],
+        ['best seo tools','5 → 3','+2','up'],
+        ['keyword research software','11 → 12','-1','dn'],
+      ].map(([kw,move,delta,dir])=>`
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);">
+        <span style="font-size:${dir==='up'?'18':'16'}px;">${dir==='up'?'📈':'📉'}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${kw}</div>
+          <div style="font-size:11px;color:var(--text3);">${move}</div>
+        </div>
+        <span class="${dir==='up'?'rk-up':'rk-dn'}" style="font-weight:700;">${delta}</span>
+      </div>`).join('')}
+    </div>`;
+  c.appendChild(grid);
+
+  // Full table
+  const table = document.createElement('div');
+  table.className = 'card';
+  table.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">All Tracked Keywords</div><div class="card-sub">${App.state.rankings.length} keywords · Updated daily</div></div>
+      <div style="display:flex;gap:8px;">
+        <input type="text" placeholder="Filter..." style="width:180px;" oninput="filterRankings(this.value)">
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="rank-table">
+        <thead><tr>
+          <th>Keyword</th><th>Current</th><th>Previous</th><th>Change</th><th>Volume</th>
+          <th>Engine</th><th>Geo</th><th>Landing Page</th><th>Updated</th>
+        </tr></thead>
+        <tbody>
+          ${App.state.rankings.map(r=>`
+          <tr>
+            <td style="font-size:13px;font-weight:500;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r.kw}</td>
+            <td><strong style="font-family:var(--font-head);font-size:16px;">${r.pos}</strong></td>
+            <td class="text-dimmed">#${r.prev}</td>
+            <td>${rankChange(r.pos, r.prev)}</td>
+            <td class="text-dimmed" style="font-size:12px;">${fmtVol(r.vol)}</td>
+            <td class="text-dimmed" style="font-size:12px;">${r.engine}</td>
+            <td class="text-dimmed" style="font-size:12px;">${r.geo}</td>
+            <td style="font-size:11px;"><a style="color:var(--accent);text-decoration:none;" href="#" onclick="App.toast('Opening ${r.url}','info')">${r.url}</a></td>
+            <td class="text-dimmed" style="font-size:12px;">${r.updated}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  c.appendChild(table);
+}
+
+function filterRankings(val) {
+  const rows = document.querySelectorAll('#rank-table tbody tr');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(val.toLowerCase()) ? '' : 'none';
+  });
+}
+function exportRankings() {
+  App.toast('⬇ Exporting rankings CSV...', 'info', 1500);
+  setTimeout(() => App.toast('✅ rankings-export.csv downloaded!', 'success'), 1700);
+}
+function addKeywords() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div>
+        <label>Add Keywords (one per line)</label>
+        <textarea style="min-height:150px;" placeholder="best seo tools&#10;keyword research software&#10;rank tracker free"></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label>Engine</label><select style="width:100%;"><option>Google</option><option>Bing</option></select></div>
+        <div><label>Location</label><select style="width:100%;"><option>🌐 Global</option><option>🇮🇳 India</option><option>🇺🇸 USA</option></select></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();App.toast('✅ Keywords added to rank tracker!','success')">+ Add to Tracker</button>
+    </div>`, 'Add Keywords to Rank Tracker');
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  BACKLINKS PAGE
+// ═══════════════════════════════════════════════════════
+function renderBacklinks(c) {
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  stats.innerHTML = [
+    { color:'blue', label:'Total Backlinks', val:'12,847', change:'▲ +312 this month', dir:'up' },
+    { color:'green', label:'Referring Domains', val:'2,104', change:'▲ +48 new', dir:'up' },
+    { color:'purple', label:'Domain Rating (DR)', val:'67', change:'Ahrefs DR scale', dir:'neutral' },
+    { color:'orange', label:'Toxic Links', val:'23', change:'Needs disavow file', dir:'neutral' },
+  ].map(s=>`
+    <div class="stat-card ${s.color}">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value">${s.val}</div>
+      <div class="stat-change ${s.dir==='up'?'up':'neutral'}">${s.change}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-2 mb20';
+
+  const goodLinks = App.state.backlinks.filter(b => b.spam < 50);
+  const toxicLinks = App.state.backlinks.filter(b => b.spam >= 50);
+
+  grid.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">🔗 Recent Backlinks</div><div class="card-sub">Last 30 days — ${goodLinks.length} quality links</div></div>
+        <button class="btn btn-secondary btn-xs" onclick="exportBacklinks()">⬇ Export</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Source Domain</th><th>DR</th><th>Anchor Text</th><th>Type</th><th>Date</th></tr></thead>
+          <tbody>
+            ${goodLinks.map(b=>`
+            <tr>
+              <td style="color:var(--accent);font-size:13px;font-weight:500;">${b.domain}</td>
+              <td><span style="font-family:var(--font-head);font-weight:800;color:${b.dr>=80?'var(--green)':b.dr>=50?'var(--orange)':'var(--red)'};">${b.dr}</span></td>
+              <td style="font-size:12px;">${b.anchor}</td>
+              <td><span class="badge ${b.type==='Dofollow'?'badge-green':'badge-gray'}">${b.type}</span></td>
+              <td class="text-dimmed" style="font-size:12px;">${b.date}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">☠️ Toxic Links</div><div class="card-sub">${toxicLinks.length} links need disavow</div></div>
+        <button class="btn btn-danger btn-sm" onclick="exportDisavow()">📄 Export Disavow File</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Source</th><th>DR</th><th>Spam Score</th><th>Action</th></tr></thead>
+          <tbody>
+            ${toxicLinks.map(b=>`
+            <tr>
+              <td style="font-size:12px;">${b.domain}</td>
+              <td><span style="color:var(--red);font-weight:700;font-family:var(--font-head);">${b.dr}</span></td>
+              <td>
+                <span style="color:${b.spam>=80?'var(--red)':'var(--orange)'};font-weight:700;font-family:var(--font-head);">${b.spam}/100</span>
+              </td>
+              <td>
+                <button class="btn btn-danger btn-xs" onclick="disavowLink('${b.domain}')">Disavow</button>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="background:rgba(240,72,72,.06);border:1px solid rgba(240,72,72,.2);border-radius:var(--r);padding:12px;margin-top:14px;font-size:12px;color:var(--text2);">
+        ⚠️ <strong>Warning:</strong> Disavowing links tells Google to ignore them. Only disavow clearly spammy or paid links. Download the disavow file and submit it via Google Search Console.
+      </div>
+    </div>`;
+  c.appendChild(grid);
+
+  // Anchor text chart
+  const anchor = document.createElement('div');
+  anchor.className = 'card';
+  anchor.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">⚓ Anchor Text Distribution</div><div class="card-sub">Breakdown of how sites link to you</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        ${[
+          ['Branded (SEO AutoPilot)','38%','var(--accent)'],
+          ['Exact match (best seo tools)','22%','var(--green)'],
+          ['Partial match (seo tools)','18%','var(--cyan)'],
+          ['Generic (click here, here)','14%','var(--orange)'],
+          ['Naked URL (seoautopilot.io)','8%','var(--text3)'],
+        ].map(([label, pct, col])=>`
+        <div class="comp-row">
+          <div class="comp-label">${label}</div>
+          <div class="comp-bar-bg"><div class="comp-bar-fill" style="width:${pct};background:${col};"></div></div>
+          <div class="comp-num">${pct}</div>
+        </div>`).join('')}
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--r2);padding:16px;">
+        <div class="card-title mb8">💡 Anchor Text Health</div>
+        <div class="mrow"><span class="mrow-key">Branded ratio</span><span class="mrow-val text-green">38% — Healthy ✓</span></div>
+        <div class="mrow"><span class="mrow-key">Exact match ratio</span><span class="mrow-val text-green">22% — Natural ✓</span></div>
+        <div class="mrow"><span class="mrow-key">Generic ratio</span><span class="mrow-val text-orange">14% — Borderline</span></div>
+        <div class="mrow"><span class="mrow-key">Over-optimization risk</span><span class="mrow-val text-green">Low ✓</span></div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text2);line-height:1.6;">
+          Your anchor text profile looks natural. A good mix of branded, exact-match, and generic anchors signals organic link building to Google.
+        </div>
+      </div>
+    </div>`;
+  c.appendChild(anchor);
+}
+
+function exportBacklinks() {
+  App.toast('⬇ Exporting backlinks...', 'info', 1500);
+  setTimeout(() => App.toast('✅ backlinks-export.csv downloaded!', 'success'), 1700);
+}
+function exportDisavow() {
+  App.toast('📄 Generating Google disavow file...', 'info', 1500);
+  setTimeout(() => App.toast('✅ disavow.txt ready — upload to Search Console!', 'success'), 1700);
+}
+function disavowLink(domain) {
+  App.toast(`🚫 ${domain} added to disavow list`, 'success');
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  COMPETITOR ANALYSIS PAGE
+// ═══════════════════════════════════════════════════════
+function renderCompetitor(c) {
+  const srch = document.createElement('div');
+  srch.className = 'card mb20';
+  srch.innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
+      <div style="flex:1;min-width:200px;">
+        <label>Competitor Domain</label>
+        <input type="url" id="comp-domain" placeholder="e.g. ahrefs.com" value="ahrefs.com">
+      </div>
+      <div style="width:200px;">
+        <label>Your Domain</label>
+        <input type="url" id="your-domain" value="seoautopilot.io">
+      </div>
+      <div style="width:140px;">
+        <label>Country</label>
+        <select><option>Global</option><option selected>India</option><option>USA</option></select>
+      </div>
+      <button class="btn btn-primary" onclick="analyzeCompetitor()">🔍 Analyze Competitor</button>
+      <button class="btn btn-secondary" onclick="compareMultiple()">⚖ Compare Multiple</button>
+    </div>`;
+  c.appendChild(srch);
+
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  stats.innerHTML = [
+    ['Est. Monthly Traffic','2.1M','Their visitors/month vs your 84K'],
+    ['Ranking Keywords','847K','Their kw count vs your 3.8K'],
+    ['Referring Domains','38.2K','Their backlinks vs your 2.1K'],
+    ['Domain Rating','91 / 67','Their DR vs your DR'],
+  ].map(([l,v,s])=>`
+    <div class="stat-card blue">
+      <div class="stat-label">${l}</div>
+      <div class="stat-value" style="font-size:22px;">${v}</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px;">${s}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-2 mb20';
+  grid.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">📄 Their Top Pages</div><div class="card-sub">Highest traffic pages on ahrefs.com</div></div>
+        <button class="btn btn-primary btn-xs" onclick="App.toast('Creating content for all gaps...','info')">Create All →</button>
+      </div>
+      <table>
+        <thead><tr><th>Page</th><th>Traffic</th><th>Keywords</th><th>Action</th></tr></thead>
+        <tbody>
+          ${[
+            ['/blog/seo-tools','84K','234'],
+            ['/features/site-explorer','61K','187'],
+            ['/blog/keyword-research-guide','47K','156'],
+            ['/blog/backlink-guide','38K','98'],
+            ['/academy/seo-training','29K','74'],
+            ['/blog/content-marketing','22K','61'],
+          ].map(([page,traffic,kws])=>`
+          <tr>
+            <td style="font-size:12px;color:var(--accent);">${page}</td>
+            <td style="font-weight:700;font-family:var(--font-head);">${traffic}</td>
+            <td class="text-dimmed" style="font-size:12px;">${kws}</td>
+            <td><button class="btn btn-ghost btn-xs" onclick="App.toast('Creating similar content...','info')">Create</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">🔍 Content Gap Analysis</div><div class="card-sub">Keywords they rank for — you don't</div></div>
+        <span class="badge badge-orange">48 gaps found</span>
+      </div>
+      ${[
+        ['backlink audit guide','18.4K','Quick Win'],
+        ['site explorer tool','14.2K','Competitive'],
+        ['content gap analysis','9.1K','Quick Win'],
+        ['broken link building','6.3K','Quick Win'],
+        ['guest post outreach template','4.8K','Easy'],
+        ['skyscraper technique','3.9K','Competitive'],
+        ['link intersect analysis','2.7K','Easy'],
+      ].map(([kw,vol,opp])=>`
+      <div class="comp-row">
+        <div class="comp-label">${kw}</div>
+        <div class="comp-bar-bg"><div class="comp-bar-fill" style="width:${Math.round(parseInt(vol)/200)}%;"></div></div>
+        <div class="comp-num">${fmtVol(parseInt(vol))}</div>
+        <button class="btn btn-ghost btn-xs" style="flex-shrink:0;width:60px;" onclick="kwWriteContent('${kw}')">Write</button>
+      </div>`).join('')}
+    </div>`;
+  c.appendChild(grid);
+
+  const intel = document.createElement('div');
+  intel.className = 'card';
+  intel.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">🎯 Strategic Opportunities</div><div class="card-sub">AI recommendations based on competitor analysis</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      ${[
+        { icon:'🚀', title:'Quick Wins (Low KD)', desc:'7 keywords with KD < 30 that competitor ranks for but you don\'t. Estimated 3-4 week ranking time.', badge:'badge-green', label:'7 Keywords', action:'Target Now' },
+        { icon:'📈', title:'Content Expansion', desc:'Their top 5 pages average 3,200 words vs your 1,800. Expanding your content could close the traffic gap.', badge:'badge-orange', label:'Expand Content', action:'Use AI Writer' },
+        { icon:'🔗', title:'Backlink Gap', desc:'38 domains link to them but not you. Focus on outreach to tech blogs and SEO resources for quick DR gains.', badge:'badge-blue', label:'38 Domains', action:'Start Outreach' },
+      ].map(op=>`
+      <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);padding:16px;">
+        <div style="font-size:22px;margin-bottom:10px;">${op.icon}</div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:6px;">${op.title}</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px;">${op.desc}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="badge ${op.badge}">${op.label}</span>
+          <button class="btn btn-primary btn-xs" onclick="App.toast('Loading...','info')">${op.action}</button>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  c.appendChild(intel);
+}
+
+function analyzeCompetitor() {
+  const domain = document.getElementById('comp-domain').value;
+  App.toast(`🔍 Analyzing ${domain}...`, 'info', 2500);
+  setTimeout(() => App.toast('✅ Competitor analysis complete — 48 content gaps found!', 'success'), 2700);
+}
+function compareMultiple() {
+  App.openModal(`
+    <div style="display:grid;gap:10px;">
+      <div><label>Competitor 1</label><input type="url" placeholder="ahrefs.com" value="ahrefs.com"></div>
+      <div><label>Competitor 2</label><input type="url" placeholder="semrush.com" value="semrush.com"></div>
+      <div><label>Competitor 3</label><input type="url" placeholder="moz.com"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();App.toast('✅ Multi-competitor analysis running...','info')">Compare All Three</button>
+    </div>`, 'Multi-Competitor Comparison');
+}
+
+window.renderRanking = renderRanking;
+window.renderBacklinks = renderBacklinks;
+window.renderCompetitor = renderCompetitor;
+window.filterRankings = filterRankings;
+window.exportRankings = exportRankings;
+window.addKeywords = addKeywords;
+window.exportBacklinks = exportBacklinks;
+window.exportDisavow = exportDisavow;
+window.disavowLink = disavowLink;
+window.analyzeCompetitor = analyzeCompetitor;
+window.compareMultiple = compareMultiple;
+// ═══════════════════════════════════════════════════════
+//  GOOGLE DOCS HUB PAGE
+// ═══════════════════════════════════════════════════════
+function renderDocs(c) {
+  const toolbar = document.createElement('div');
+  toolbar.className = 'flex items-center gap8 mb20';
+  toolbar.style.flexWrap = 'wrap';
+  toolbar.innerHTML = `
+    <div style="position:relative;flex:1;min-width:200px;">
+      <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;">🔍</span>
+      <input type="text" placeholder="Search documents..." style="padding-left:34px;" oninput="filterDocs(this.value)" id="docs-search">
+    </div>
+    <select id="docs-folder" onchange="filterDocs(document.getElementById('docs-search').value)" style="width:140px;">
+      <option value="">All Folders</option>
+      <option>Blog Posts</option>
+      <option>Guides</option>
+      <option>Checklists</option>
+    </select>
+    <select id="docs-status" onchange="filterDocs(document.getElementById('docs-search').value)" style="width:140px;">
+      <option value="">All Status</option>
+      <option>Draft</option>
+      <option>Pending Review</option>
+      <option>Final</option>
+    </select>
+    <div style="margin-left:auto;display:flex;gap:8px;">
+      <div style="display:flex;align-items:center;gap:6px;padding:7px 12px;background:rgba(34,201,122,.08);border:1px solid rgba(34,201,122,.2);border-radius:var(--r);font-size:12px;">
+        <div style="width:7px;height:7px;border-radius:50%;background:var(--green);"></div>
+        Google Drive Connected
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="syncDrive()">↻ Sync Drive</button>
+      <button class="btn btn-primary btn-sm" onclick="createNewDoc()">+ New Doc</button>
+    </div>`;
+  c.appendChild(toolbar);
+
+  // Stats
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  stats.innerHTML = [
+    ['📄','Total Documents','6','All versions'],
+    ['✅','Final / Ready','2','Ready to publish'],
+    ['🕐','Pending Review','2','Needs approval'],
+    ['📝','Drafts','2','Work in progress'],
+  ].map(([ic,l,v,s])=>`
+    <div class="stat-card blue">
+      <div style="font-size:20px;margin-bottom:10px;">${ic}</div>
+      <div class="stat-label">${l}</div>
+      <div class="stat-value" style="font-size:24px;">${v}</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px;">${s}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  // Doc cards grid
+  const grid = document.createElement('div');
+  grid.id = 'docs-grid';
+  grid.className = 'grid-3';
+  renderDocCards(grid);
+  c.appendChild(grid);
+}
+
+function renderDocCards(container) {
+  container.innerHTML = App.state.docs.map(doc => `
+    <div class="doc-card" data-title="${doc.title.toLowerCase()}" data-folder="${doc.folder}" data-status="${doc.status}" id="doc-card-${doc.id}">
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;">
+        <div style="width:38px;height:38px;background:rgba(91,141,238,.1);border:1px solid rgba(91,141,238,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📄</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${doc.title}">${doc.title}</div>
+          <div style="font-size:11px;color:var(--text3);">🔑 ${doc.kw}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;">
+        ${statusBadge(doc.status)}
+        <span class="badge badge-gray">📁 ${doc.folder}</span>
+        <span class="badge badge-purple">v${doc.version}</span>
+      </div>
+      <div style="font-size:11.5px;color:var(--text3);margin-bottom:12px;background:var(--bg3);border-radius:6px;padding:8px 10px;">
+        <div><strong>Meta:</strong> ${doc.metaTitle}</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:11px;color:var(--text3);">Updated ${doc.updated}</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-ghost btn-xs" onclick="openDoc(${doc.id})">📝 Edit</button>
+          <button class="btn btn-primary btn-xs" onclick="publishDoc(${doc.id})">🚀 Publish</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterDocs(val) {
+  const folder = document.getElementById('docs-folder').value;
+  const status = document.getElementById('docs-status').value;
+  document.querySelectorAll('[data-title]').forEach(card => {
+    const matchTitle = !val || card.dataset.title.includes(val.toLowerCase());
+    const matchFolder = !folder || card.dataset.folder === folder;
+    const matchStatus = !status || card.dataset.status === status;
+    card.style.display = (matchTitle && matchFolder && matchStatus) ? '' : 'none';
+  });
+}
+
+function openDoc(id) {
+  const doc = App.state.docs.find(d => d.id === id);
+  if (!doc) return;
+  App.openModal(`
+    <div style="background:var(--bg3);border-radius:var(--r);padding:14px;margin-bottom:14px;font-size:12px;">
+      <div style="font-weight:700;margin-bottom:4px;">📋 Meta Information</div>
+      <div><strong>Title:</strong> ${doc.metaTitle}</div>
+      <div><strong>Description:</strong> ${doc.metaDesc}</div>
+      <div><strong>Keywords:</strong> ${doc.kw}</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label>Document Status</label>
+      <select style="width:100%;">
+        <option ${doc.status==='Draft'?'selected':''}>Draft</option>
+        <option ${doc.status==='Pending Review'?'selected':''}>Pending Review</option>
+        <option ${doc.status==='Final'?'selected':''}>Final</option>
+      </select>
+    </div>
+    <div style="background:var(--bg3);border-radius:var(--r);padding:14px;font-size:13px;color:var(--text2);margin-bottom:14px;">
+      [Document content would be displayed and edited here — in production, this integrates with Google Docs embedded editor via the Google Docs API]
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+      <button class="btn btn-secondary" style="justify-content:center;" onclick="App.toast('Opening in Google Docs...','info')">📄 Open in Drive</button>
+      <button class="btn btn-secondary" style="justify-content:center;" onclick="App.toast('Saving version...','success');App.closeModal()">💾 Save Version</button>
+      <button class="btn btn-primary" style="justify-content:center;" onclick="App.closeModal();App.navigate('publish')">🚀 Send to Publish</button>
+    </div>`, doc.title);
+}
+
+function publishDoc(id) {
+  App.navigate('publish');
+  App.toast('📄 Content loaded in publisher', 'info');
+}
+function syncDrive() {
+  App.toast('↻ Syncing with Google Drive...', 'info', 2000);
+  setTimeout(() => App.toast('✅ Google Drive synced — 6 documents up to date', 'success'), 2200);
+}
+function createNewDoc() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div><label>Document Title</label><input type="text" placeholder="e.g. How to Improve Domain Authority"></div>
+      <div><label>Target Keyword</label><input type="text" placeholder="domain authority"></div>
+      <div><label>Folder</label><select style="width:100%;"><option>Blog Posts</option><option>Guides</option><option>Checklists</option><option>+ New Folder</option></select></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button class="btn btn-secondary" style="justify-content:center;" onclick="App.closeModal()">Cancel</button>
+        <button class="btn btn-primary" style="justify-content:center;" onclick="App.closeModal();App.toast('✅ New document created in Google Drive!','success')">Create Document</button>
+      </div>
+    </div>`, 'Create New Google Doc');
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  SHEETS TRACKER PAGE
+// ═══════════════════════════════════════════════════════
+function renderSheets(c) {
+  const toolbar = document.createElement('div');
+  toolbar.className = 'flex items-center gap8 mb20';
+  toolbar.style.flexWrap = 'wrap';
+  toolbar.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(34,201,122,.08);border:1px solid rgba(34,201,122,.25);border-radius:var(--r);font-size:13px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);"></div>
+      Connected to Google Sheets
+    </div>
+    <button class="btn btn-secondary btn-sm" onclick="syncSheets()">↻ Sync</button>
+    <select id="filter-status" style="width:160px;" onchange="filterSheets()">
+      <option value="">All Status</option>
+      <option>Draft</option>
+      <option>Pending Review</option>
+      <option>Published</option>
+    </select>
+    <select style="width:140px;">
+      <option>All Types</option>
+      <option>Blog</option>
+      <option>Guide</option>
+      <option>Checklist</option>
+    </select>
+    <div style="margin-left:auto;display:flex;gap:8px;">
+      <button class="btn btn-secondary btn-sm" onclick="openInSheets()">🔗 Open in Sheets</button>
+      <button class="btn btn-primary btn-sm" onclick="addSheetEntry()">+ Add Entry</button>
+    </div>`;
+  c.appendChild(toolbar);
+
+  // Summary stats
+  const stats = document.createElement('div');
+  stats.className = 'grid-4 mb20';
+  const total = App.state.sheets.length;
+  const pub = App.state.sheets.filter(s=>s.status==='Published').length;
+  const rev = App.state.sheets.filter(s=>s.status==='Pending Review').length;
+  const draft = App.state.sheets.filter(s=>s.status==='Draft').length;
+  stats.innerHTML = [
+    ['📋','Total Entries',total,''],
+    ['✅','Published',pub,'text-green'],
+    ['🕐','Pending Review',rev,'text-orange'],
+    ['📝','Draft',draft,'text-dimmed'],
+  ].map(([ic,l,v,cls])=>`
+    <div class="stat-card blue">
+      <div style="font-size:20px;margin-bottom:8px;">${ic}</div>
+      <div class="stat-label">${l}</div>
+      <div class="stat-value ${cls}" style="font-size:26px;">${v}</div>
+    </div>`).join('');
+  c.appendChild(stats);
+
+  // Color legend
+  const legend = document.createElement('div');
+  legend.className = 'flex gap8 mb16';
+  legend.style.flexWrap = 'wrap';
+  legend.innerHTML = `
+    <span style="font-size:12px;color:var(--text3);">Status colors:</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(34,201,122,.3);display:inline-block;"></span>Published</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(245,166,35,.3);display:inline-block;"></span>Pending Review</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(91,141,238,.1);display:inline-block;"></span>Draft</span>`;
+  c.appendChild(legend);
+
+  // Table
+  const table = document.createElement('div');
+  table.className = 'card';
+  table.innerHTML = `
+    <div class="card-header">
+      <div><div class="card-title">📊 Content Workflow Tracker</div><div class="card-sub">Synced with Google Sheets · Auto-updates on status change</div></div>
+      <button class="btn btn-secondary btn-xs" onclick="exportSheets()">⬇ Export</button>
+    </div>
+    <div class="table-wrap">
+      <table id="sheets-table">
+        <thead><tr>
+          <th>#</th><th>Topic Name</th><th>Keywords</th><th>Type</th>
+          <th>Doc Link</th><th>Status</th><th>Publish URL</th><th>Created</th><th>Updated</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="sheets-tbody">
+          ${renderSheetRows(App.state.sheets)}
+        </tbody>
+      </table>
+    </div>`;
+  c.appendChild(table);
+}
+
+function renderSheetRows(rows) {
+  return rows.map(row => {
+    const rowBg = row.status==='Published'?'rgba(34,201,122,.04)':row.status==='Pending Review'?'rgba(245,166,35,.04)':'';
+    return `<tr style="background:${rowBg};" id="sheet-row-${row.id}">
+      <td class="text-dimmed" style="font-size:12px;">${row.id}</td>
+      <td style="font-size:13px;font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${row.topic}">${row.topic}</td>
+      <td style="font-size:11px;color:var(--text3);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${row.kw}">${row.kw}</td>
+      <td><span class="badge badge-blue" style="font-size:10px;">${row.type}</span></td>
+      <td><a style="color:var(--accent);font-size:11px;text-decoration:none;display:flex;align-items:center;gap:3px;" href="#" onclick="App.toast('Opening Google Doc...','info')">📄 View Doc</a></td>
+      <td>
+        <select style="font-size:11px;padding:3px 24px 3px 7px;width:130px;" onchange="updateSheetStatus(${row.id},this.value)">
+          <option ${row.status==='Draft'?'selected':''}>Draft</option>
+          <option ${row.status==='Pending Review'?'selected':''}>Pending Review</option>
+          <option ${row.status==='Published'?'selected':''}>Published</option>
+        </select>
+      </td>
+      <td style="font-size:11px;">${row.url?`<a style="color:var(--accent);text-decoration:none;" href="#" onclick="App.toast('Opening ${row.url}','info')">${row.url}</a>`:'<span class="text-dimmed">—</span>'}</td>
+      <td class="text-dimmed" style="font-size:12px;">${row.created}</td>
+      <td class="text-dimmed" style="font-size:12px;">${row.updated}</td>
+      <td>
+        <div style="display:flex;gap:4px;">
+          <button class="btn btn-ghost btn-xs" onclick="App.toast('Opening doc editor...','info')">✏</button>
+          <button class="btn btn-primary btn-xs" onclick="App.navigate('publish')">🚀</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterSheets() {
+  const status = document.getElementById('filter-status').value;
+  const rows = document.querySelectorAll('#sheets-tbody tr');
+  rows.forEach(row => {
+    if (!status) { row.style.display = ''; return; }
+    const sel = row.querySelector('select');
+    row.style.display = (sel && sel.value === status) ? '' : 'none';
+  });
+}
+function updateSheetStatus(id, status) {
+  const row = App.state.sheets.find(r => r.id === id);
+  if (row) {
+    row.status = status;
+    row.updated = 'Just now';
+    App.toast(`✅ Status updated to "${status}" — Sheets synced`, 'success');
+  }
+}
+function syncSheets() {
+  App.toast('↻ Syncing with Google Sheets...', 'info', 2000);
+  setTimeout(() => App.toast('✅ Google Sheets synced — all rows up to date', 'success'), 2200);
+}
+function openInSheets() {
+  App.toast('🔗 Opening Google Sheets...', 'info');
+}
+function addSheetEntry() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div><label>Topic Name</label><input type="text" placeholder="e.g. Core Web Vitals Guide"></div>
+      <div><label>Target Keywords</label><input type="text" placeholder="core web vitals, page speed, cwv"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label>Content Type</label><select style="width:100%;"><option>Blog</option><option>Guide</option><option>Checklist</option><option>Landing Page</option></select></div>
+        <div><label>Status</label><select style="width:100%;"><option>Draft</option><option>Pending Review</option></select></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();addNewEntry()">Add to Tracker</button>
+    </div>`, 'Add New Content Entry');
+}
+function addNewEntry() {
+  const newEntry = { id:App.state.sheets.length+1, topic:'Core Web Vitals Guide', kw:'core web vitals, page speed', type:'Guide', status:'Draft', url:null, created:'Today', updated:'Today' };
+  App.state.sheets.push(newEntry);
+  const tbody = document.getElementById('sheets-tbody');
+  if (tbody) {
+    tbody.insertAdjacentHTML('beforeend', renderSheetRows([newEntry]));
+  }
+  App.toast('✅ Entry added to Sheets tracker!', 'success');
+}
+function exportSheets() {
+  App.toast('⬇ Exporting Sheets data...', 'info', 1500);
+  setTimeout(() => App.toast('✅ content-tracker.csv downloaded!', 'success'), 1700);
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  WORDPRESS PUBLISHER PAGE
+// ═══════════════════════════════════════════════════════
+function renderPublish(c) {
+  const grid = document.createElement('div');
+  grid.className = 'grid-7-5';
+  grid.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- WP Connection Card -->
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">🔌 WordPress Connection</div><div class="card-sub">REST API integration</div></div>
+          <span class="wp-conn ok"><div class="wp-dot"></div><span style="color:var(--green);font-size:12px;font-weight:600;">Connected</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(91,141,238,.07);border:1px solid rgba(91,141,238,.2);border-radius:var(--r);">
+          <span style="font-size:28px;">🌐</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;">yoursite.com</div>
+            <div style="font-size:12px;color:var(--text3);">WordPress 6.4 · REST API v2 · admin@yoursite.com</div>
+          </div>
+          <button class="btn btn-ghost btn-xs" style="margin-left:auto;" onclick="reconnectWP()">Reconnect</button>
+        </div>
+      </div>
+
+      <!-- Publish Form -->
+      <div class="card">
+        <div class="card-title mb16">📤 Publish Content</div>
+        <div style="display:grid;gap:14px;">
+          <div>
+            <label>Select Content</label>
+            <select id="pub-content">
+              ${App.state.contents.map(c=>`<option value="${c.id}" ${c.status==='Published'||c.status==='Draft'&&c.score<70?'disabled':''}>
+                ${c.title} (${c.status} · Score ${c.score})
+              </option>`).join('')}
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Publish Mode</label>
+              <select id="pub-mode" onchange="updateSchedule()">
+                <option>Publish Instantly</option>
+                <option>Save as Draft</option>
+                <option>Schedule for Later</option>
+              </select>
+            </div>
+            <div>
+              <label>Schedule Date/Time</label>
+              <input type="text" id="pub-date" value="Jan 28, 2025 09:00 AM" id="pub-schedule">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label>Category</label>
+              <select>
+                <option>SEO</option>
+                <option>Content Marketing</option>
+                <option>Tools & Resources</option>
+                <option>+ New Category</option>
+              </select>
+            </div>
+            <div>
+              <label>SEO Plugin</label>
+              <select id="pub-plugin">
+                <option>Yoast SEO</option>
+                <option>Rank Math</option>
+                <option>All in One SEO</option>
+                <option>None</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label>Tags (comma separated)</label>
+            <input type="text" id="pub-tags" value="seo, tools, keyword research, rank tracking, content optimization">
+          </div>
+          <div>
+            <label>Custom Slug</label>
+            <div style="display:flex;gap:8px;">
+              <span style="padding:9px 12px;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--r);font-size:12px;color:var(--text3);flex-shrink:0;">yoursite.com/blog/</span>
+              <input type="text" value="best-seo-tools-2025" style="flex:1;">
+            </div>
+          </div>
+          <div>
+            <label>Auto-Attach Settings</label>
+            <div style="display:grid;gap:8px;margin-top:4px;">
+              ${[
+                ['featured-img','Featured Image (AI generated)','true'],
+                ['pub-yoast','SEO meta via plugin (Yoast/RankMath)','true'],
+                ['pub-slug','Optimized URL slug','true'],
+                ['pub-schema','FAQ Schema Markup','true'],
+                ['pub-internal','Internal link suggestions','false'],
+                ['pub-social','Social Open Graph tags','true'],
+              ].map(([id,label,checked])=>`
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:13px;color:var(--text2);">${label}</span>
+                <label class="toggle">
+                  <input type="checkbox" id="${id}" ${checked==='true'?'checked':''}>
+                  <div class="toggle-track"></div><div class="toggle-thumb"></div>
+                </label>
+              </div>`).join('')}
+            </div>
+          </div>
+          <div id="pub-result" style="display:none;"></div>
+          <button class="btn btn-primary pulsing" style="justify-content:center;padding:12px;font-size:14px;" id="pub-btn" onclick="publishToWP()">
+            🚀 Publish to WordPress
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="card-title mb12">📊 Publishing Stats</div>
+        <div class="mrow"><span class="mrow-key">Total Published</span><span class="mrow-val">${App.state.posts.filter(p=>p.status==='Published').length}</span></div>
+        <div class="mrow"><span class="mrow-key">Drafts Saved</span><span class="mrow-val">${App.state.posts.filter(p=>p.status==='Draft').length}</span></div>
+        <div class="mrow"><span class="mrow-key">Total Views</span><span class="mrow-val">${App.state.posts.reduce((a,p)=>a+p.views,0).toLocaleString()}</span></div>
+        <div class="mrow"><span class="mrow-key">Avg SEO Score</span><span class="mrow-val text-green">89/100</span></div>
+        <div class="mrow"><span class="mrow-key">Last Published</span><span class="mrow-val">Jan 12</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">📝 Published Posts</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Post</th><th>Status</th><th>Views</th><th>Date</th></tr></thead>
+            <tbody>
+              ${App.state.posts.map(p=>`
+              <tr>
+                <td style="font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.title}">${p.title}</td>
+                <td>${statusBadge(p.status)}</td>
+                <td style="font-size:12px;font-weight:600;">${p.views>0?p.views.toLocaleString():'—'}</td>
+                <td class="text-dimmed" style="font-size:12px;">${p.date}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">📅 Scheduled Posts</div>
+        <div id="scheduled-list">
+          <div style="text-align:center;padding:24px 0;color:var(--text3);">
+            <div style="font-size:28px;margin-bottom:8px;">📅</div>
+            <div style="font-size:13px;">No scheduled posts</div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;margin-top:8px;" onclick="schedulePost()">+ Schedule a Post</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb12">🔌 API Endpoints</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--text2);line-height:2;">
+          <div><span style="color:var(--green);">POST</span> /wp-json/wp/v2/posts</div>
+          <div><span style="color:var(--cyan);">PUT</span> /wp-json/wp/v2/posts/{id}</div>
+          <div><span style="color:var(--accent);">GET</span> /wp-json/wp/v2/categories</div>
+          <div><span style="color:var(--accent);">GET</span> /wp-json/wp/v2/tags</div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px;">All requests use Application Password authentication</div>
+      </div>
+    </div>`;
+  c.appendChild(grid);
+}
+
+let publishInProgress = false;
+function publishToWP() {
+  if (publishInProgress) return;
+  publishInProgress = true;
+  const btn = document.getElementById('pub-btn');
+  const mode = document.getElementById('pub-mode').value;
+  btn.innerHTML = '<span class="spin">↻</span> Publishing...';
+  btn.disabled = true;
+  btn.classList.remove('pulsing');
+
+  setTimeout(() => {
+    publishInProgress = false;
+    btn.disabled = false;
+    const result = document.getElementById('pub-result');
+    result.style.display = 'block';
+    result.innerHTML = `
+      <div style="background:rgba(34,201,122,.08);border:1px solid rgba(34,201,122,.25);border-radius:var(--r);padding:14px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:18px;">✅</span>
+          <strong style="color:var(--green);">${mode === 'Save as Draft' ? 'Saved as Draft' : mode === 'Schedule for Later' ? 'Post Scheduled!' : 'Published Successfully!'}</strong>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">
+          <div>🔗 URL: <a style="color:var(--accent);" href="#">yoursite.com/blog/best-seo-tools-2025</a></div>
+          <div>📊 Yoast SEO meta applied · Schema markup injected · Sheets updated</div>
+        </div>
+      </div>`;
+    btn.innerHTML = `🚀 Publish to WordPress`;
+    btn.classList.add('pulsing');
+    App.toast(`✅ ${mode === 'Save as Draft' ? 'Saved as draft' : 'Published to WordPress!'} · Sheets tracker updated`, 'success');
+
+    // Update posts
+    App.state.posts.unshift({ id:99, title:'10 Best SEO Tools in 2025', status: mode==='Save as Draft'?'Draft':'Published', date:'Today', url:'yoursite.com/blog/best-seo-tools-2025', views:0 });
+  }, 3000);
+}
+function reconnectWP() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div><label>WordPress Site URL</label><input type="url" value="https://yoursite.com"></div>
+      <div><label>Username</label><input type="text" value="admin"></div>
+      <div><label>Application Password</label><input type="text" placeholder="xxxx xxxx xxxx xxxx xxxx xxxx"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();App.toast('✅ WordPress reconnected!','success')">Test & Connect</button>
+    </div>`, 'Reconnect WordPress');
+}
+function schedulePost() {
+  App.openModal(`
+    <div style="display:grid;gap:14px;">
+      <div><label>Content</label><select style="width:100%;"><option>10 Best SEO Tools in 2025</option><option>Backlink Building Guide</option></select></div>
+      <div><label>Publish Date & Time</label><input type="text" value="Feb 1, 2025 10:00 AM IST"></div>
+      <div><label>Timezone</label><select style="width:100%;"><option>IST (UTC+5:30)</option><option>EST</option><option>UTC</option></select></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="App.closeModal();App.toast('✅ Post scheduled for Feb 1, 2025!','success')">Schedule Post</button>
+    </div>`, 'Schedule a Post');
+}
+function updateSchedule() {
+  const mode = document.getElementById('pub-mode').value;
+  const dateInput = document.getElementById('pub-date');
+  if (dateInput) dateInput.disabled = mode !== 'Schedule for Later';
+}
+
+
+// ═══════════════════════════════════════════════════════
+//  SETTINGS PAGE
+// ═══════════════════════════════════════════════════════
+function renderSettings(c) {
+  const tabs = document.createElement('div');
+  tabs.className = 'tabs';
+  tabs.innerHTML = `
+    <div class="tab active" onclick="settingsTab(this,'integrations')">🔌 Integrations</div>
+    <div class="tab" onclick="settingsTab(this,'account')">👤 Account</div>
+    <div class="tab" onclick="settingsTab(this,'team')">👥 Team</div>
+    <div class="tab" onclick="settingsTab(this,'api')">🔑 API Keys</div>`;
+  c.appendChild(tabs);
+
+  const panel = document.createElement('div');
+  panel.id = 'settings-panel';
+  c.appendChild(panel);
+  renderIntegrations(panel);
+}
+
+function settingsTab(el, panel) {
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const p = document.getElementById('settings-panel');
+  if (panel === 'integrations') renderIntegrations(p);
+  else if (panel === 'account') renderAccount(p);
+  else if (panel === 'team') renderTeam(p);
+  else if (panel === 'api') renderAPIKeys(p);
+}
+
+function renderIntegrations(c) {
+  c.innerHTML = `
+    <div class="grid-2">
+      ${[
+        { icon:'📄', name:'Google Docs', desc:'Auto-save generated content as Google Docs in your Drive', status:true, action:'Manage' },
+        { icon:'📊', name:'Google Sheets', desc:'Track content workflow in a Google Sheets spreadsheet', status:true, action:'Manage' },
+        { icon:'📈', name:'Google Search Console', desc:'Import real keyword rankings and CTR data', status:false, action:'Connect' },
+        { icon:'📉', name:'Google Analytics', desc:'Pull organic traffic and conversion data', status:false, action:'Connect' },
+        { icon:'🌐', name:'WordPress REST API', desc:'Publish, draft and schedule posts directly', status:true, action:'Manage' },
+        { icon:'🤖', name:'Claude (Anthropic)', desc:'AI engine for content generation and keyword clustering', status:true, action:'Configured' },
+      ].map(int=>`
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:44px;height:44px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${int.icon}</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-weight:700;font-size:14px;">${int.name}</div>
+            <span class="badge ${int.status?'badge-green':'badge-gray'}">${int.status?'✓ Connected':'Not connected'}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5;">${int.desc}</div>
+          <button class="btn ${int.status?'btn-secondary':'btn-primary'} btn-sm" onclick="App.toast('${int.action==='Connect'?'Connecting...':'Opening settings...'}','info')">${int.action} →</button>
+        </div>
+      </div>`).join('')}
+    </div>`;
+}
+
+function renderAccount(c) {
+  c.innerHTML = `
+    <div class="grid-7-5">
+      <div class="card">
+        <div class="card-title mb16">Profile Information</div>
+        <div style="display:grid;gap:12px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div><label>First Name</label><input type="text" value="Arjun"></div>
+            <div><label>Last Name</label><input type="text" value="Kumar"></div>
+          </div>
+          <div><label>Email</label><input type="email" value="arjun@yourcompany.com"></div>
+          <div><label>Company</label><input type="text" value="YourCompany Inc."></div>
+          <div><label>Website</label><input type="url" value="https://yoursite.com"></div>
+          <div><label>Time Zone</label><select style="width:100%;"><option>Asia/Kolkata (IST)</option><option>America/New_York</option><option>UTC</option></select></div>
+          <button class="btn btn-primary btn-sm" style="width:fit-content;" onclick="App.toast('✅ Profile saved!','success')">Save Changes</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card">
+          <div class="card-title mb12">Current Plan</div>
+          <div style="background:var(--g1);border-radius:var(--r2);padding:16px;text-align:center;margin-bottom:12px;">
+            <div style="font-family:var(--font-head);font-size:18px;font-weight:800;">PRO Plan</div>
+            <div style="font-size:12px;opacity:.8;margin-top:4px;">$49/month · Billed monthly</div>
+          </div>
+          <div class="mrow"><span class="mrow-key">AI Content credits</span><span class="mrow-val">340 / 500</span></div>
+          <div class="mrow"><span class="mrow-key">Tracked keywords</span><span class="mrow-val">3,847 / 5,000</span></div>
+          <div class="mrow"><span class="mrow-key">Projects</span><span class="mrow-val">3 / 5</span></div>
+          <div class="mrow"><span class="mrow-key">Next renewal</span><span class="mrow-val">Feb 28, 2025</span></div>
+          <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;margin-top:12px;" onclick="App.toast('Opening billing portal...','info')">Manage Billing →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderTeam(c) {
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Team Members</div><div class="card-sub">Manage access and roles</div></div>
+        <button class="btn btn-primary btn-sm" onclick="App.toast('Invite sent!','success')">+ Invite Member</button>
+      </div>
+      <table>
+        <thead><tr><th>Member</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${[
+            ['AK','Arjun Kumar','arjun@yourcompany.com','Admin','Active'],
+            ['PS','Priya Sharma','priya@yourcompany.com','Editor','Active'],
+            ['RG','Rahul Gupta','rahul@yourcompany.com','Viewer','Invited'],
+          ].map(([init,name,email,role,status])=>`
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div class="avatar" style="width:28px;height:28px;font-size:11px;">${init}</div>
+                <span style="font-weight:600;font-size:13px;">${name}</span>
+              </div>
+            </td>
+            <td style="font-size:13px;color:var(--text2);">${email}</td>
+            <td>
+              <select style="font-size:12px;padding:4px 24px 4px 8px;width:100px;">
+                <option ${role==='Admin'?'selected':''}>Admin</option>
+                <option ${role==='Editor'?'selected':''}>Editor</option>
+                <option ${role==='Viewer'?'selected':''}>Viewer</option>
+              </select>
+            </td>
+            <td>${statusBadge(status==='Active'?'Published':status==='Invited'?'Pending Review':'Draft')}</td>
+            <td><button class="btn btn-ghost btn-xs" onclick="App.toast('Member removed','success')">Remove</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function renderAPIKeys(c) {
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">API Keys & Credentials</div><div class="card-sub">Securely stored — never shared</div></div>
+      </div>
+      <div style="display:grid;gap:14px;">
+        ${[
+          ['Claude API Key','Anthropic Claude — Powers AI content generation','sk-ant-api03-••••••••••••••••','Connected'],
+          ['WordPress App Password','REST API authentication','admin:xxxx xxxx xxxx xxxx xxxx xxxx','Connected'],
+          ['Google OAuth Token','Docs + Sheets + Search Console access','ya29.a0ARrd••••••••••••••','Connected'],
+          ['Google Analytics ID','GA4 measurement ID','G-XXXXXXXXXX','Not connected'],
+        ].map(([name,desc,key,status])=>`
+        <div style="padding:14px;border:1px solid var(--border2);border-radius:var(--r2);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-weight:700;font-size:13px;">${name}</span>
+            <span class="badge ${status==='Connected'?'badge-green':'badge-gray'}">${status}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">${desc}</div>
+          <div style="display:flex;gap:8px;">
+            <input type="password" value="${key}" style="flex:1;font-family:var(--font-mono);font-size:12px;">
+            <button class="btn btn-ghost btn-xs" onclick="App.toast('Key revealed','info')">👁 Show</button>
+            <button class="btn btn-ghost btn-xs" onclick="App.toast('Key copied!','success')">📋 Copy</button>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+window.renderDocs = renderDocs;
+window.renderSheets = renderSheets;
+window.renderPublish = renderPublish;
+window.renderSettings = renderSettings;
+window.renderDocCards = renderDocCards;
+window.filterDocs = filterDocs;
+window.openDoc = openDoc;
+window.publishDoc = publishDoc;
+window.syncDrive = syncDrive;
+window.createNewDoc = createNewDoc;
+window.renderSheetRows = renderSheetRows;
+window.filterSheets = filterSheets;
+window.updateSheetStatus = updateSheetStatus;
+window.syncSheets = syncSheets;
+window.openInSheets = openInSheets;
+window.addSheetEntry = addSheetEntry;
+window.addNewEntry = addNewEntry;
+window.exportSheets = exportSheets;
+window.publishToWP = publishToWP;
+window.reconnectWP = reconnectWP;
+window.schedulePost = schedulePost;
+window.updateSchedule = updateSchedule;
+window.settingsTab = settingsTab;
+window.renderIntegrations = renderIntegrations;
+window.renderAccount = renderAccount;
+window.renderTeam = renderTeam;
+window.renderAPIKeys = renderAPIKeys;
+</script>
+<script>
+window.addEventListener('DOMContentLoaded', () => { App.init(); });
+function globalSearch(v){
+  if(!v||v.length<2)return;
+  const lv=v.toLowerCase();
+  const pages=['keywords','content','optimize','audit','ranking','backlinks','competitor','docs','sheets','publish'];
+  const found=pages.find(p=>p.includes(lv)||PAGES[p].title.toLowerCase().includes(lv));
+  if(found){App.navigate(found);document.getElementById('global-search').value='';}
+}
+let darkMode=true;
+function toggleDarkMode(){
+  darkMode=!darkMode;
+  const r=document.documentElement.style;
+  if(!darkMode){
+    r.setProperty('--bg','#f4f5f7');r.setProperty('--bg2','#ffffff');r.setProperty('--bg3','#f0f2f5');
+    r.setProperty('--bg4','#e4e7ec');r.setProperty('--text','#111827');r.setProperty('--text2','#4b5563');
+    r.setProperty('--text3','#9ca3af');r.setProperty('--border','rgba(0,0,0,0.08)');r.setProperty('--border2','rgba(0,0,0,0.12)');
+  } else {
+    r.setProperty('--bg','#07080b');r.setProperty('--bg2','#0d0f14');r.setProperty('--bg3','#131620');
+    r.setProperty('--bg4','#181c28');r.setProperty('--text','#e2e4ee');r.setProperty('--text2','#9ca3b8');
+    r.setProperty('--text3','#5a6380');r.setProperty('--border','rgba(255,255,255,0.06)');r.setProperty('--border2','rgba(255,255,255,0.1)');
+  }
+  App.toast((darkMode?'🌙 Dark':'☀️ Light')+' mode','info',1500);
+}
+function showNotifications(){
+  App.openModal(`<div style="display:flex;flex-direction:column;gap:10px;">
+    ${[['📈','Ranking win','"best seo tools" moved #5 → #3','2h ago',true],
+    ['🔗','New backlink','techcrunch.com linked (DR 93)','5h ago',true],
+    ['⚠️','Audit alert','4 new broken links detected','1d ago',false],
+    ['✅','Published','"10 Best SEO Tools" went live','2d ago',false]
+    ].map(([ic,t,m,time,u])=>`<div style="display:flex;gap:10px;padding:11px;border-radius:10px;background:${u?'rgba(91,141,238,.06)':'var(--bg3)'};border:1px solid ${u?'rgba(91,141,238,.15)':'var(--border)'}">
+      <span style="font-size:18px">${ic}</span>
+      <div><div style="font-size:13px;font-weight:600">${t}${u?'<span class="badge badge-blue" style="margin-left:8px;font-size:9px">New</span>':''}</div><div style="font-size:12px;color:var(--text2)">${m}</div><div style="font-size:11px;color:var(--text3)">${time}</div></div>
+    </div>`).join('')}
+  </div>`,'🔔 Notifications');
+}
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();document.getElementById('global-search').focus();}
+  if(e.key==='Escape'){App.closeModal();App.closePanel();}
+});
+</script>
+</body>
+</html>
